@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use App\Models\Laundry;
 
 class ManagerController extends Controller
 {
@@ -13,7 +14,9 @@ class ManagerController extends Controller
 
     public function inputdata()
     {
-        return view('manager.inputdata');
+        // Ambil data jenis_layanan, nama_layanan, dan durasi_layanan dari tabel laundries
+        $laundries = Laundry::all();
+        return view('manager.inputdata', compact('laundries'));
     }
 
     public function store(Request $request)

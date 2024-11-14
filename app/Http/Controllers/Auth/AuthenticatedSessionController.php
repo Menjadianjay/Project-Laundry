@@ -31,10 +31,11 @@ class AuthenticatedSessionController extends Controller
         if ($user->name === 'manager') {
             // Redirect ke halaman manager jika pengguna adalah manager
             return redirect()->intended(route('manager.dashboard'));
-        } elseif ($user->name === 'pegawai') {
-            // Redirect ke halaman pegawai jika pengguna adalah pegawai
+        } elseif (in_array($user->name, ['Ferdy', 'Mado', 'Rio', 'Juliano'])) {
+            // Redirect ke halaman pegawai jika pengguna adalah pegawai dengan nama yang disebutkan
             return redirect()->intended(route('pegawai.dashboard'));
         }
+        
 
         // Jika peran tidak diketahui, arahkan ke halaman default (misalnya halaman login)
         return redirect()->route('login');

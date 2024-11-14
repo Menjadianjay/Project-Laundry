@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Presensi;
+use Illuminate\Support\Facades\Auth;
 
 class PresensiController extends Controller
 {
         public function presensi()
     {
         return view('pegawai.presensi');
+    }
+    public function presensimanager()
+    {
+        return view('manager.presensi');
     }
 
     // Menyimpan data presensi ke database
@@ -39,7 +44,17 @@ class PresensiController extends Controller
         ]);
 
         // Redirect atau menampilkan pesan sukses
-        return redirect()->route('pegawai.dashboard')->with('success', 'Presensi berhasil disimpan.');
+        // return redirect()->route('pegawai.dashboard')->with('success', 'Presensi berhasil disimpan.');
+        // Ambil pengguna yang sedang login
+        $user = Auth::user();
+        // Cek peran pengguna (pegawai atau manager)
+        if ($user->name === 'manager') {
+            // Redirect ke halaman manager jika pengguna adalah manager
+            return redirect()->intended(route('manager.dashboard'));
+        } elseif (in_array($user->name, ['Ferdy', 'Mado', 'Rio', 'Juliano'])) {
+            // Redirect ke halaman pegawai jika pengguna adalah pegawai dengan nama yang disebutkan
+            return redirect()->intended(route('pegawai.dashboard'));
+        }
     }
 
     // Menampilkan data presensi dalam bentuk tabel di dashboard Pegawai

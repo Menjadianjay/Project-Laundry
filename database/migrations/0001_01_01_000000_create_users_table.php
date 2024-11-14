@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('no_telp')->nullable(); // Menambahkan kolom no_telp
+            $table->string('alamat')->nullable(); // Menambahkan kolom alamat
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
@@ -38,20 +40,53 @@ return new class extends Migration
             $table->integer('last_activity')->index();
         });
 
-        // default akun untuk login admin ke dalam database
+        // Menambahkan akun pegawai beserta no_telp dan alamat
         DB::table('users')->insert([
-            'name' => 'pegawai',
-            'email' => 'pegawai@gmail.com',
-            'password' => Hash::make('12345678'),
-            'created_at' => now(),
-            'updated_at' => now(),
+            [
+                'name' => 'Ferdy',
+                'email' => 'ferdy@gmail.com',
+                'password' => Hash::make('12345678'),
+                'no_telp' => '0882007203515',
+                'alamat' => 'Jl. Srikaloka No.547',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Mado',
+                'email' => 'mado@gmail.com',
+                'password' => Hash::make('12345678'),
+                'no_telp' => '081234567891',
+                'alamat' => 'Jl. Raya Tajem',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Rio',
+                'email' => 'rio@gmail.com',
+                'password' => Hash::make('12345678'),
+                'no_telp' => '081234567811',
+                'alamat' => 'Jl. Bringin No.31',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Juliano',
+                'email' => 'juliano@gmail.com',
+                'password' => Hash::make('12345678'),
+                'no_telp' => '081234567800',
+                'alamat' => 'Jl. Paingan No.4',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
         ]);
 
-        // Default akun untuk login manager ke dalam database
+        // Menambahkan akun manager
         DB::table('users')->insert([
             'name' => 'manager',
             'email' => 'manager@gmail.com',
             'password' => Hash::make('12345678'),
+            'no_telp' => '081385613704',
+            'alamat' => 'Jl. Sengkan No.22',
             'created_at' => now(),
             'updated_at' => now(),
         ]);

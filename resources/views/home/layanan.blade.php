@@ -84,7 +84,7 @@
                 <div class="card">
                     <!-- <img src="2.png" class="card-img-top" alt="Layanan 2"> -->
                     <div class="card-body">
-                        <h3 class="card-title"><b>2 Hari</b></h3>
+                        <h3 class="card-title"><b>Kilat</b></h3>
                         <p class="card-text">Proses selama 2 hari</p>
                         <p class="card-info">Rp 4.000,-/kg</p>
                         <a href="http://wa.me/628985552417" class="btn btn-primary">Pesan sekarang</a>
@@ -97,7 +97,7 @@
                 <div class="card">
                     <!-- <img src="3.png" class="card-img-top" alt="Layanan 3"> -->
                     <div class="card-body">
-                        <h3 class="card-title"><b>3 Hari</b></h3>
+                        <h3 class="card-title"><b>Reguler</b></h3>
                         <p class="card-text">Proses selama 3 hari</p>
                         <p class="card-info">Rp 3.000,-/kg</p>
                         <a href="http://wa.me/628985552417" class="btn btn-primary">Pesan sekarang</a>

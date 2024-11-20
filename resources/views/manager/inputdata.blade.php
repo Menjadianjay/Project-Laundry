@@ -149,20 +149,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Transaksi Laundry</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/da.css') }}">
-    <style>
-        /* Styles */
-    </style>
+    <!-- Metadata dan link ke CSS seperti sebelumnya -->
 </head>
-
 <body>
-    @include('template.sidebarmanager')
     <div class="dashboard-content">
         <div class="container">
             <h3>Form Transaksi Laundry</h3>
@@ -176,26 +165,25 @@
                     <label for="namaPelanggan">Nama Pelanggan:</label>
                     <input type="text" id="namaPelanggan" name="namaPelanggan" placeholder="Masukkan nama pelanggan" required>
                 </div>
-
-                <!-- Pilihan Jenis Layanan -->
                 <div class="form-group">
-                    <label for="jenisLayanan">Jenis Layanan:</label>
-                    <select id="jenisLayanan" name="jenisLayanan" required>
-                        <option value="" disabled selected>Pilih jenis layanan</option>
-                        @foreach($laundries as $laundry)
-                            <option value="{{ $laundry->jenis_layanan }}">{{ $laundry->jenis_layanan }}</option>
-                        @endforeach
-                    </select>
+                    <label for="noTelp">No. Telp:</label>
+                    <input type="text" id="noTelp" name="noTelp" placeholder="Masukkan nomor telepon pelanggan" required>
+                </div>
+                <div class="form-group">
+                    <label for="alamat">Alamat:</label>
+                    <textarea id="alamat" name="alamat" placeholder="Masukkan alamat pelanggan" required></textarea>
                 </div>
 
-                <!-- Pilihan Durasi Layanan -->
+                <!-- Pilihan Layanan (Jenis Layanan + Durasi Layanan) -->
                 <div class="form-group">
-                    <label for="jenisLaundry">Jenis Laundry:</label>
-                    <select id="jenisLaundry" name="jenisLaundry" required>
-                        <option value="" disabled selected>Pilih jenis laundry</option>
-                        <option value="Express">Express</option>
-                        <option value="Kilat">Kilat</option>
-                        <option value="Reguler">Reguler</option>
+                    <label for="layanan">Layanan:</label>
+                    <select id="layanan" name="layanan" required>
+                        <option value="" disabled selected>Pilih layanan</option>
+                        @foreach($laundries as $laundry)
+                            <option value="{{ $laundry->jenis_layanan }} - {{ $laundry->durasi_layanan }}">
+                                {{ $laundry->jenis_layanan }} - {{ $laundry->durasi_layanan }}
+                            </option>
+                        @endforeach
                     </select>
                 </div>
 
@@ -203,6 +191,7 @@
                     <label for="berat">Berat (kg):</label>
                     <input type="number" id="berat" name="berat" placeholder="Masukkan berat laundry" required>
                 </div>
+                
                 <div class="form-group">
                     <label>Metode Pembayaran:</label>
                     <div class="form-check">
@@ -214,6 +203,7 @@
                         <label class="form-check-label" for="transfer">Transfer</label>
                     </div>
                 </div>
+                
                 <div class="form-group d-flex">
                     <button type="button" class="btn btn-secondary" onclick="window.location.href='{{ route('manager.dashboard') }}'">Batal</button>
                     <button type="submit" class="btn btn-primary">Simpan Transaksi</button>                
@@ -223,3 +213,5 @@
     </div>
 </body>
 </html>
+
+

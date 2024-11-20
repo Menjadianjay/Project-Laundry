@@ -11,7 +11,7 @@
     <style>
         .container {
             background-color: #ffff;
-            padding: 20px;
+            padding: 100px;
             border-radius: 8px;
             box-shadow: 5 0 10px rgba(0, 0, 0, 0.1);
             width: 800px;
@@ -33,6 +33,8 @@
         table, th, td {
             border: 1px solid #ddd;
             padding: 8px;
+            width: 900px;
+            margin-left: -50px;
         }
 
         th {
@@ -85,6 +87,7 @@
                         <th>Nama Layanan</th>
                         <th>Durasi Layanan</th>
                         <th>Tarif Layanan (Rp)</th>
+                        <th>Keterangan</th> <!-- Tambahkan kolom Keterangan -->
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -95,6 +98,7 @@
                         <td>{{ $laundry->jenis_layanan }}</td>
                         <td>{{ $laundry->durasi_layanan }}</td>
                         <td>Rp {{ number_format($laundry->tarif_layanan, 0, ',', '.') }}</td>
+                        <td>{{ $laundry->keterangan }}</td> <!-- Tampilkan keterangan di sini -->
                         <td>
                             <a href="{{ route('manager.editlayanan', $laundry->id) }}" class="btn-edit">Edit</a>
                             <form action="{{ route('manager.deletelayanan', $laundry->id) }}" method="POST" style="display:inline-block;">
@@ -116,3 +120,4 @@
     </div>
 </body>
 </html>
+

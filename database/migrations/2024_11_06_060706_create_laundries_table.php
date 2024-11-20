@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('jenis_layanan'); // Cuci setrika atau cuci lipat
             $table->decimal('tarif_layanan', 10, 2);
             $table->string('durasi_layanan'); // Express, 2 hari atau 3 hari
+            $table->string('keterangan'); // Keterangan layanan
             $table->timestamps();
         });
     }

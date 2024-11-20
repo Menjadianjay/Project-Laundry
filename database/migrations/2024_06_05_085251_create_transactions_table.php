@@ -10,14 +10,17 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('pelanggan_id'); // Foreign key ke tabel pelanggans
+            $table->unsignedBigInteger('laundry_id'); // Foreign key ke tabel laundries
             $table->date('tanggal_masuk');
-            $table->string('nama_pelanggan');
-            $table->string('jenis_layanan');
-            $table->string('jenis_laundry');
             $table->decimal('berat', 8, 2);
             $table->string('metode_pembayaran');
-            $table->decimal('total_harga', 10, 2); 
+            $table->decimal('total_harga', 10, 2);
             $table->timestamps();
+
+            // Define foreign keys
+            $table->foreign('pelanggan_id')->references('id')->on('pelanggans')->onDelete('cascade');
+            $table->foreign('laundry_id')->references('id')->on('laundries')->onDelete('cascade');
         });
     }
 

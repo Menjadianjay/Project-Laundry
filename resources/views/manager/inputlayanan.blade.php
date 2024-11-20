@@ -32,7 +32,8 @@
 
         input[type="text"],
         input[type="number"],
-        select {
+        select,
+        textarea {
             width: 100%;
             padding: 8px;
             margin-bottom: 15px;
@@ -115,6 +116,10 @@
 
                 <label for="tarif_layanan">Tarif Layanan:</label>
                 <input type="number" id="tarif_layanan" name="tarif_layanan" placeholder="Masukkan Tarif layanan (contoh: 5000)" required>
+
+                <!-- Tambahkan input untuk Keterangan -->
+                <label for="keterangan">Keterangan:</label>
+                <textarea id="keterangan" name="keterangan" placeholder="Masukkan keterangan layanan" rows="4"></textarea>
 
                 <div class="form-group d-flex">
                     <button type="button" class="btn btn-batal" onclick="window.location.href='{{ route('manager.dashboard') }}'">Batal</button>

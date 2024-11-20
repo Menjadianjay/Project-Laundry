@@ -19,6 +19,7 @@ class LaundryController extends Controller
             'jenis_layanan' => 'required|string',
             'tarif_layanan' => 'required|numeric',
             'durasi_layanan' => 'required|string',
+            'keterangan' => 'nullable|string', // Tambahkan validasi keterangan
         ]);
 
         Laundry::create($request->all());
@@ -31,5 +32,4 @@ class LaundryController extends Controller
         $laundries = Laundry::all();
         return view('manager.viewlayanan', compact('laundries'));
     }
-
 }

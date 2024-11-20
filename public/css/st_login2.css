@@ -1,0 +1,161 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(
+            rgba(255, 255, 255, 0.5),
+            rgba(255, 255, 255, 0.5)
+        ),
+        url("BG_PODOMORO_LOGIN.png") no-repeat center center;
+    background-size: cover;
+    background-position: center;
+}
+.navbar {
+    display: flex;
+    height: 70px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    /* Atur ukuran dan warna bayangan sesuai kebutuhan */
+}
+
+.navbar-brand {
+    display: flex;
+    font-weight: bold;
+    color: #5eb1e6 !important;
+}
+
+.navbar-nav .nav-link {
+    display: flex;
+    padding: 15px 10px;
+    /* Contoh mengatur padding link navbar */
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #5eb1e6 !important;
+    color: #007bff;
+}
+
+.wrapper {
+    width: 420px;
+    background: transparent;
+    color: rgb(13, 76, 127);
+    border-radius: 10px;
+    padding: 30px 40px;
+}
+
+.wrapper h1 {
+    font-size: 36px;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.wrapper .input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgb(255, 225, 0);
+    border-radius: 40px;
+    font-size: 16;
+    color: rgb(13, 76, 127);
+    padding: 20px 45px 20px 20px;
+}
+.input-box input::placeholder {
+    color: rgb(13, 76, 127);
+    font-weight: 500;
+    font-style: bold;
+}
+.input-box i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+}
+.wrapper .btn {
+    width: 100%;
+    height: 45px;
+    background-color: rgb(13, 76, 127);
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 16px;
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+}
+.wrapper .register-link {
+    font-size: 14.5px;
+    text-align: center;
+    margin: 20px 0 15px;
+}
+.register-link p a {
+    color: rgb(13, 76, 127);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.register-link p a:hover {
+    text-decoration: underline;
+}
+
+@media screen and (min-width: 1024px) {
+    .wrapper {
+        width: 600px;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .wrapper {
+        width: 500px;
+    }
+
+    body {
+        background-size: cover;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .wrapper {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .wrapper h1 {
+        font-size: 28px;
+    }
+
+    .input-box input {
+        font-size: 14px;
+        padding: 15px 35px 15px 15px;
+    }
+
+    .wrapper .btn {
+        height: 40px;
+    }
+
+    .input-box {
+        margin: 20px 0;
+    }
+
+    .register-link p {
+        font-size: 13px;
+    }
+}

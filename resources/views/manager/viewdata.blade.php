@@ -165,83 +165,60 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/da.css') }}">
-    <style>
-        .container {
-            background-color: #fff;
-            padding: 30px; /* Ubah padding untuk memperkecil ukuran container */
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 1000px; /* Ukuran lebar container */
-            margin: 50px auto;
-        }
+<style>
+    .container {
+        background-color: #fff;
+        padding: 20px; /* Ubah padding container */
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: auto; /* Lebar container lebih kecil */
+        margin: 30px auto; /* Ubah margin */
+    }
 
-        h2 {
-            color: #333;
-            margin-bottom: 20px;
-            text-align: center;
-            font-size: 1.5em; /* Ukuran font lebih kecil */
-        }
+    h2 {
+        font-size: 1.3em; /* Ukuran font lebih kecil */
+    }
 
-        table {
-            width: 100%;
-            margin-bottom: 20px;
-        }
+    table {
+        width: 100%;
+        margin-bottom: 10px;
+    }
 
-        th, td {
-            padding: 3px; /* Ubah padding untuk memperkecil ukuran sel */
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-            font-size: 0.8em; /* Ukuran font lebih kecil */
-        }
+    th, td {
+        padding: 5px; /* Kurangi padding sel tabel */
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+        font-size: 0.57em; /* Ukuran font lebih kecil */
+        white-space: nowrap; /* Teks tetap dalam satu baris */
+    }
 
-        th {
-            background-color: #f2f2f2;
-            font-weight: bold;
-        }
+    th {
+        background-color: #f7f7f7;
+        font-weight: bold;
+    }
 
-        .btn {
-            background-color: #5eb1e6;
-            color: white;
-            padding: 5px; /* Ubah padding untuk memperkecil ukuran tombol */
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 80px; /* Ukuran lebar tombol lebih kecil */
-            margin: 5px;
-            font-size: 0.8em; /* Ukuran font tombol lebih kecil */
-        }
+    .btn {
+        padding: 3px; /* Kurangi padding tombol */
+        font-size: 0.7em; /* Ukuran font tombol lebih kecil */
+        width: 60px; /* Lebar tombol lebih kecil */
+    }
 
-        .btn:hover {
-            background-color: #007bff;
-        }
+    .btn-actions {
+        display: flex;
+        gap: 3px; /* Kurangi jarak antar tombol */
+    }
 
-        .btn-secondary {
-            background-color: #f44336;
-            color: white;
-            width: 80px; /* Ukuran lebar tombol lebih kecil */
-        }
+    .alert {
+        padding: 8px; /* Kurangi padding alert */
+        font-size: 0.8em; /* Ukuran font alert lebih kecil */
+    }
 
-        .btn-secondary:hover {
-            background-color: #e53935;
-        }
+    .alert-info {
+        background-color: #e8f4fa;
+        color: #31708f;
+    }
+</style>
 
-        .btn-actions {
-            display: flex;
-            gap: 5px; /* Ubah jarak antar tombol */
-        }
-
-        .alert {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border-radius: 4px;
-        }
-
-        .alert-info {
-            background-color: #d1ecf1;
-            color: #0c5460;
-        }
-    </style>
 </head>
 <body>
     @include('template.sidebarmanager')

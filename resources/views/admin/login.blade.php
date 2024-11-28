@@ -10,6 +10,17 @@
   <link rel="stylesheet" href="{{ asset('css/st_login2.css') }}" />
   <link rel="icon" href="{{ asset('img/logo.png') }}">
 </head>
+<style>
+    body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.858), rgba(255, 255, 255, 0.5)),
+    url("{{ asset('img/BG_PODOMORO_LOGIN.png') }}");
+}
+</style>
 
 <body>
   <br>
@@ -45,23 +56,23 @@
       <h1>Admin Login</h1>
 
       <div class="input-box">
-        <input 
-          type="text" 
-          name="email" 
-          placeholder="Username" 
-          value="{{ old('email') }}" 
-          required 
-          autofocus 
+        <input
+          type="text"
+          name="email"
+          placeholder="Username"
+          value="{{ old('email') }}"
+          required
+          autofocus
         />
         <i class="bx bxs-user"></i>
       </div>
 
       <div class="input-box">
-        <input 
-          type="password" 
-          name="password" 
-          placeholder="Password" 
-          required 
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          required
         />
         <i class="bx bxs-lock-alt"></i>
       </div>

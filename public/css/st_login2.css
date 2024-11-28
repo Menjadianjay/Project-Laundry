@@ -11,13 +11,6 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(
-            rgba(255, 255, 255, 0.5),
-            rgba(255, 255, 255, 0.5)
-        ),
-        url("BG_PODOMORO_LOGIN.png") no-repeat center center;
-    background-size: cover;
-    background-position: center;
 }
 .navbar {
     display: flex;

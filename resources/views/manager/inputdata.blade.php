@@ -1,4 +1,4 @@
-{{-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -34,7 +34,8 @@
         input[type="text"],
         input[type="number"],
         input[type="date"],
-        select {
+        select,
+        textarea {
             width: 100%;
             padding: 8px;
             margin-bottom: 15px;
@@ -71,14 +72,14 @@
         }
 
         .form-check {
-            display:inline-flex;
+            display: inline-flex;
             margin-right: 10px;
         }
 
         .form-group {
             text-align: left;
         }
-        
+
         .form-group.d-flex {
             justify-content: space-between;
             display: flex;
@@ -102,81 +103,17 @@
                     <input type="text" id="namaPelanggan" name="namaPelanggan" placeholder="Masukkan nama pelanggan" required>
                 </div>
                 <div class="form-group">
-                    <label for="jenisLayanan">Jenis Layanan:</label>
-                    <select id="jenisLayanan" name="jenisLayanan" required>
-                        <option value="" disabled selected>Pilih jenis layanan</option>
-                        <option value="Cuci setrika">Cuci Setrika</option>
-                        <option value="Cuci lipat">Cuci Lipat</option>
-                        <option value="Setrika saja">Setrika Saja</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="jenisLaundry">Jenis Laundry:</label>
-                    <select id="jenisLaundry" name="jenisLaundry" required>
-                        <option value="" disabled selected>Pilih jenis laundry</option>
-                        <option value="Express">Express</option>
-                        <option value="2 hari">2 Hari</option>
-                        <option value="3 hari">3 Hari</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="berat">Berat (kg):</label>
-                    <input type="number" id="berat" name="berat" placeholder="Masukkan berat laundry" required>
-                </div>
-                <div class="form-group">
-                    <label>Metode Pembayaran:</label>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" id="cash" name="metodePembayaran" value="cash" required>
-                        <label class="form-check-label" for="cash">Cash</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" id="transfer" name="metodePembayaran" value="transfer" required>
-                        <label class="form-check-label" for="transfer">Transfer</label>
-                    </div>
-                </div>
-                <div class="form-group d-flex">
-                    <button type="button" class="btn btn-secondary" onclick="window.location.href='{{ Auth::user()->name === 'manager' ? route('manager.dashboard') : route('manager.dashboard') }}'">Batal</button>
-                    <button type="submit" class="btn btn-primary">Simpan Transaksi</button>                
-                </div>
-            </form>
-        </div>       
-    </div>
-    
-
-</body>
-
-</html> --}}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- Metadata dan link ke CSS seperti sebelumnya -->
-</head>
-<body>
-    <div class="dashboard-content">
-        <div class="container">
-            <h3>Form Transaksi Laundry</h3>
-            <form action="{{ route('manager.store') }}" method="POST">
-                @csrf
-                <div class="form-group">
-                    <label for="tanggalMasuk">Tanggal Masuk:</label>
-                    <input type="date" id="tanggalMasuk" name="tanggalMasuk" required>
-                </div>
-                <div class="form-group">
-                    <label for="namaPelanggan">Nama Pelanggan:</label>
-                    <input type="text" id="namaPelanggan" name="namaPelanggan" placeholder="Masukkan nama pelanggan" required>
-                </div>
-                <div class="form-group">
                     <label for="noTelp">No. Telp:</label>
                     <input type="text" id="noTelp" name="noTelp" placeholder="Masukkan nomor telepon pelanggan" required>
                 </div>
                 <div class="form-group">
                     <label for="alamat">Alamat:</label>
-                    <textarea id="alamat" name="alamat" placeholder="Masukkan alamat pelanggan" required></textarea>
+                    <textarea id="alamat" name="alamat" placeholder="Masukkan alamat pelanggan" rows="3" required></textarea>
                 </div>
 
-                <!-- Pilihan Layanan (Jenis Layanan + Durasi Layanan) -->
+                <!-- Pilihan Layanan -->
                 <div class="form-group">
-                    <label for="layanan">Layanan:</label>
+                    <label for="layanan">Layanan Laundry :</label>
                     <select id="layanan" name="layanan" required>
                         <option value="" disabled selected>Pilih layanan</option>
                         @foreach($laundries as $laundry)
@@ -212,6 +149,5 @@
         </div>       
     </div>
 </body>
+
 </html>
-
-

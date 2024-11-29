@@ -139,14 +139,15 @@
                         <td class="btn-actions">
                             <!-- Tombol Edit -->
                             <a href="{{ route('presensi.edit', $presensi->id) }}" class="btn btn-warning btn-sm">Edit</a>
-
+                        
                             <!-- Tombol Hapus -->
                             <form action="{{ route('presensi.destroy', $presensi->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
+                                <button type="submit" class="btn btn-secondary btn-sm" style="background-color: #e53935; color: white;" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
                             </form>
                         </td>
+                        
                     </tr>
                     @endforeach
                 </tbody>

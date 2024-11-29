@@ -16,8 +16,8 @@ class LayananController extends Controller
     //     return view('manager.viewlayanan');
     // }
 
-    public function editlayanan()
-    {
-        return view('manager.editlayanan');
-    }
+    // public function editlayanan()
+    // {
+    //     return view('manager.editlayanan');
+    // }
 }

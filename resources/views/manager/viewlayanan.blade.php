@@ -106,7 +106,7 @@
                                 @method('DELETE')
                                 <button type="submit" class="btn-hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus layanan ini?')">Hapus</button>
                             </form>
-                        </td>
+                        </td>                        
                     </tr>
                     @endforeach
                 </tbody>

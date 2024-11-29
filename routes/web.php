@@ -4,9 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\LayananController;
 use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\LaundryController;
 
 
 // Untuk tampilan Home
@@ -78,17 +78,16 @@ Route::get('manager/viewpresensi', [PresensiController::class, 'viewpresensiMana
 Route::get('/presensi/{id}/edit', [PresensiController::class, 'editpresensi'])->middleware(['auth', 'verified'])->name('presensi.edit');
 Route::put('/presensi/{id}', [PresensiController::class, 'update'])->middleware(['auth', 'verified'])->name('presensi.update');
 Route::delete('/presensi/{id}', [PresensiController::class, 'destroy'])->middleware(['auth', 'verified'])->name('presensi.destroy');
-// Route::get('manager/inputlayanan', [LayananController::class, 'inputlayanan'])->middleware(['auth', 'verified'])->name('manager.inputlayanan');
-// Route::get('manager/viewlayanan', [LayananController::class, 'viewlayanan'])->middleware(['auth', 'verified'])->name('manager.viewlayanan');
-Route::get('manager/editlayanan', [LayananController::class, 'editlayanan'])->middleware(['auth', 'verified'])->name('manager.editlayanan');
 
-use App\Http\Controllers\LaundryController;
+
 
 Route::get('/manager/inputlayanan', [LaundryController::class, 'create'])->name('manager.inputlayanan');
 Route::post('/manager/inputlayanan', [LaundryController::class, 'store'])->name('manager.storelayanan');
-
+Route::get('manager/editlayanan/{id}', [LaundryController::class, 'edit'])->name('manager.editlayanan');
+Route::put('manager/updatelayanan/{id}', [LaundryController::class, 'update'])->name('manager.updatelayanan');
 Route::get('/manager/viewlayanan', [LaundryController::class, 'viewlayanan'])->name('manager.viewlayanan');
 Route::delete('/manager/laundries/{id}', [LaundryController::class, 'destroy'])->name('manager.deletelayanan');
-Route::get('/manager/laundries/{id}/edit', [LaundryController::class, 'edit'])->name('manager.editlayanan');
+Route::delete('/manager/laundries/{id}', [LaundryController::class, 'destroy'])->name('manager.deletelayanan');
+
 
 

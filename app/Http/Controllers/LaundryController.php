@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Laundry;
 use Illuminate\Http\Request;
 
@@ -33,7 +34,8 @@ class LaundryController extends Controller
         return view('manager.viewlayanan', compact('laundries'));
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $laundry = Laundry::findOrFail($id);
         return view('manager.editlayanan', compact('laundry'));
     }
@@ -61,6 +63,10 @@ class LaundryController extends Controller
 
         return redirect()->route('manager.viewlayanan')->with('success', 'Layanan laundry berhasil dihapus.');
     }
-
-
+    #harus membuat function pemanggilan untuk menampilkan di view layanan
+    public function viewlandinglayanan()
+    {
+        $laundries = DB::table('laundries')->get();
+        return view('home.layanan', ['laundries' => $laundries]);
+    }
 }

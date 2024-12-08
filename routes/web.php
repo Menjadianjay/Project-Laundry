@@ -18,14 +18,14 @@ Route::get('/kontak', [HomeController::class, 'kontak']);
 // Untuk Login
 Route::middleware('guest')->group(function () {
     Route::get('admin/login', [AuthenticatedSessionController::class, 'create'])
-                ->name('login');
+        ->name('login');
 
     Route::post('admin/login', [AuthenticatedSessionController::class, 'store']);
 });
 
 Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
-                ->name('logout');
+        ->name('logout');
 });
 
 //Pegawai
@@ -89,5 +89,5 @@ Route::get('/manager/viewlayanan', [LaundryController::class, 'viewlayanan'])->n
 Route::delete('/manager/laundries/{id}', [LaundryController::class, 'destroy'])->name('manager.deletelayanan');
 Route::delete('/manager/laundries/{id}', [LaundryController::class, 'destroy'])->name('manager.deletelayanan');
 
-
-
+Route::get('/layanan', [LaundryController::class, 'viewlandinglayanan'])->name('layanan');
+Route::put('/layanan', [LaundryController::class, 'viewlandinglayanan'])->name('layanan');

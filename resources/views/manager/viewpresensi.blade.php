@@ -32,7 +32,7 @@
             box-shadow: 5 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
             position: absolute;
-            top: 50%;
+            top: 20%;
             left: 60%;
             transform: translate(-50%, -50%);
             max-height: 90vh;

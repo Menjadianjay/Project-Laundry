@@ -1,16 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Models\Laundry;
 use App\Models\Pelanggan;
+use Illuminate\Support\Facades\DB;
 
 class ManagerController extends Controller
 {
     public function dashboard()
     {
-        return view('manager.dashboard');
+        $transaksis = DB::table('transactions')->get();
+        return view('manager.dashboard', ['transaksis' => $transaksis]);
     }
 
     public function inputdata()
@@ -27,7 +30,7 @@ class ManagerController extends Controller
             'namaPelanggan' => 'required|string|max:255',
             'noTelp' => 'required|string|max:15',
             'alamat' => 'required|string',
-            'layanan' => 'required|string', 
+            'layanan' => 'required|string',
             'berat' => 'required|numeric',
             'metodePembayaran' => 'required|string',
         ]);
@@ -39,6 +42,7 @@ class ManagerController extends Controller
         $pelanggan = Pelanggan::updateOrCreate(
             ['nama' => $request->namaPelanggan],
             [
+                'nama' => $request->namaPelanggan,
                 'no_telp' => $request->noTelp,
                 'alamat' => $request->alamat,
             ]
@@ -128,5 +132,5 @@ class ManagerController extends Controller
             return redirect()->route('manager.viewdata');
         }
         return redirect()->route('manager.viewdata');
-    }   
+    }
 }

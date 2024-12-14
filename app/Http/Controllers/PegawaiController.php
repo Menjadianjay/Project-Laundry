@@ -5,17 +5,23 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Laundry;
+use App\Models\Pelanggan;
+use Illuminate\Support\Facades\DB;
 
 class PegawaiController extends Controller
 {
     public function dashboard()
     {
+        /*$transaksis = DB::table('transactions')->get();
+        return view('pegawai.dashboard', ['transaksis' => $transaksis]);*/
         return view('pegawai.dashboard');
     }
 
     public function inputdata()
     {
-        return view('pegawai.inputdata');
+        $laundries = DB::table('laundries')->get();
+        return view('pegawai.inputdata', ['laundries' => $laundries]);
     }
 
     public function store(Request $request)
@@ -23,30 +29,46 @@ class PegawaiController extends Controller
         $request->validate([
             'tanggalMasuk' => 'required|date',
             'namaPelanggan' => 'required|string|max:255',
-            'jenisLayanan' => 'required|string',
-            'jenisLaundry' => 'required|string',
+            'noTelp' => 'required|string|max:15',
+            'alamat' => 'required|string',
+            'layanan' => 'required|string',
             'berat' => 'required|numeric',
             'metodePembayaran' => 'required|string',
         ]);
 
-        $totalHarga = Transaction::calculatePrice(
-            $request->jenisLayanan,
-            $request->jenisLaundry,
-            $request->berat
+        // Pecah layanan menjadi jenis layanan dan durasi layanan
+        [$jenisLayanan, $durasiLayanan] = explode(' - ', $request->layanan);
+
+        // Buat atau ambil pelanggan berdasarkan nama
+        $pelanggan = Pelanggan::updateOrCreate(
+            ['nama' => $request->namaPelanggan],
+            [
+                'no_telp' => $request->noTelp,
+                'alamat' => $request->alamat,
+            ]
         );
 
+        // Ambil laundry yang sesuai atau buat entri baru
+        $laundry = Laundry::updateOrCreate(
+            [
+                'jenis_layanan' => $jenisLayanan,
+                'durasi_layanan' => $durasiLayanan,
+            ]
+        );
+
+        // Hitung total harga
+        $totalHarga = $laundry->tarif_layanan * $request->berat;
+
+        // Simpan transaksi
         Transaction::create([
             'tanggal_masuk' => $request->tanggalMasuk,
-            'nama_pelanggan' => $request->namaPelanggan,
-            'jenis_layanan' => $request->jenisLayanan,
-            'jenis_laundry' => $request->jenisLaundry,
+            'pelanggan_id' => $pelanggan->id,
+            'laundry_id' => $laundry->id,
             'berat' => $request->berat,
             'metode_pembayaran' => $request->metodePembayaran,
             'total_harga' => $totalHarga,
         ]);
-
-        return redirect()->route('pegawai.dashboard');
-
+        return redirect()->route('pegawai.dashboard')->with('success', 'Transaksi berhasil disimpan.');
     }
 
     public function viewdata()
@@ -101,5 +123,5 @@ class PegawaiController extends Controller
             return redirect()->route('pegawai.viewdata');
         }
         return redirect()->route('pegawai.viewdata');
-    }   
+    }
 }

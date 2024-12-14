@@ -10,14 +10,35 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/da.css') }}">
     <style>
+        html, body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        }
+
+        body {
+            background-image: url("{{ asset('img/dash.png') }}");
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+        }
+
         .container {
-            background-color: #fff;
+            background-color: #ffff;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 5 0 10px rgba(0, 0, 0, 0.1);
             width: 500px;
             text-align: center;
-            margin: 50px auto;
+            position: absolute;
+            top: 50%;
+            left: 60%;
+            transform: translate(-50%, -50%);
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         h3 {
@@ -128,7 +149,7 @@
                     <label for="berat">Berat (kg):</label>
                     <input type="number" id="berat" name="berat" placeholder="Masukkan berat laundry" required>
                 </div>
-                
+
                 <div class="form-group">
                     <label>Metode Pembayaran:</label>
                     <div class="form-check">
@@ -140,13 +161,13 @@
                         <label class="form-check-label" for="transfer">Transfer</label>
                     </div>
                 </div>
-                
+
                 <div class="form-group d-flex">
                     <button type="button" class="btn btn-secondary" onclick="window.location.href='{{ route('manager.dashboard') }}'">Batal</button>
-                    <button type="submit" class="btn btn-primary">Simpan Transaksi</button>                
+                    <button type="submit" class="btn btn-primary">Simpan Transaksi</button>
                 </div>
             </form>
-        </div>       
+        </div>
     </div>
 </body>
 

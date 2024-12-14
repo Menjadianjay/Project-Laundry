@@ -95,6 +95,7 @@
 
 <body>
         <div class="container">
+            @include('template.sidebarmanager')
             <h3>Edit Transaksi Laundry</h3>
             <form action="{{ route('manager.update', $transaction->id) }}" method="POST">
                 @csrf
@@ -105,7 +106,7 @@
                 </div>
                 <div class="form-group">
                     <label for="namaPelanggan">Nama Pelanggan</label>
-                    <input type="text" class="form-control" id="namaPelanggan" name="namaPelanggan" placeholder="Masukkan nama pelanggan" required value="{{ $transaction->nama_pelanggan }}">
+                    <input type="text" class="form-control" id="namaPelanggan" name="namaPelanggan" required value="{{ $transaction->nama_pelanggan }}">
                 </div>
                 <div class="form-group">
                     <label for="jenisLayanan">Jenis Layanan</label>

@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Presensi Pegawai</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     {{-- <link rel="stylesheet" href="{{ asset('css/style_presensi.css') }}" /> --}}
+    <link rel="stylesheet" href="{{ asset('css/da.css') }}">
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -86,6 +89,7 @@
 </head>
 
 <body>
+    @include('template.sidebarmanager')
     <form action="{{ route('presensi.update', $presensi->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')

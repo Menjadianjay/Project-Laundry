@@ -10,19 +10,35 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/da.css') }}">
     <style>
+        html, body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        }
+
         body {
-            font-family: 'Poppins', sans-serif;
             background-image: url("{{ asset('img/dash.png') }}");
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
         }
 
         .container {
-            background-color: #fff;
+            background-color: #ffff;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 5 0 10px rgba(0, 0, 0, 0.1);
             width: 500px;
             text-align: center;
-            margin: 50px auto;
+            position: absolute;
+            top: 50%;
+            left: 60%;
+            transform: translate(-50%, -50%);
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         h2 {
@@ -88,12 +104,12 @@
 
 <body>
     @include('template.sidebarmanager')
-    <div class="dashboard-content"> 
+    <div class="dashboard-content">
         <form action="{{ route('presensi.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="container">
                 <h2>Input Presensi Pegawai</h2>
-    
+
                 <div class="form-group">
                     <label for="nama">Nama Pegawai</label>
                     <select id="nama" name="nama">
@@ -103,7 +119,7 @@
                         <option value="Rio">Rio</option>
                     </select>
                 </div>
-    
+
                 <div class="form-group">
                     <label for="kehadiran">Kehadiran</label>
                     <select id="kehadiran" name="kehadiran">
@@ -113,25 +129,25 @@
                         <option value="Ijin">Ijin</option>
                     </select>
                 </div>
-    
+
                 <div class="form-group">
                     <label for="keterangan">Keterangan Ijin</label>
                     <textarea id="keterangan" name="keterangan" rows="4"></textarea>
                 </div>
-    
+
                 <div class="form-group">
                     <label for="upload">Upload Surat Keterangan Sakit</label>
                     <input type="file" id="upload" name="upload">
                 </div>
-    
+
                 <div class="form-group d-flex">
                     <a href="{{ route('manager.dashboard') }}" class="btn btn-secondary">Back</a>
                     <button type="submit" class="btn btn-success">Simpan</button>
                 </div>
             </div>
-        </form>     
+        </form>
     </div>
-    
+
 </body>
 
 </html>

@@ -8,71 +8,145 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/da.css') }}">
-    <style>
-        .container {
-            background-color: #ffff;
-            padding: 100px;
-            border-radius: 8px;
-            box-shadow: 5 0 10px rgba(0, 0, 0, 0.1);
-            width: 800px;
-            text-align: center;
-            margin: 0 auto;
-            margin-top: 50px;
-        }
 
-        h2 {
-            color: black;
-            margin-bottom: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        table, th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            width: 900px;
-            margin-left: -50px;
-        }
-
-        th {
-            background-color: #5eb1e6;
-            color: white;
-        }
-
-        td, th {
-            text-align: left;
-        }
-
-        button,
-        .btn-edit,
-        .btn-hapus {
-            background-color: #5eb1e6;
-            color: white;
-            padding: 8px 12px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .btn-hapus {
-            background-color: #f44336;
-        }
-
-        .btn-secondary {
-            background-color: #f44336;
-            color: white;
-            padding: 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 15%;
-        }
-    </style>
 </head>
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+    }
 
+    body {
+        background-image: url("{{ asset('img/dash.png') }}");
+        background-size: cover;
+        background-position: center;
+    }
+
+    .container {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 75%;
+        height: 75vh;
+        margin: 5% 15%;
+        overflow-y: auto;
+        overflow-x: auto;
+    }
+    .dashboard-content {
+    margin-left: 250px;
+    min-height: 100vh;
+    background-image: url("../img/dash.png");
+    background-position: flex;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    }
+
+    /* Scrollbar styling */
+    .container::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;  /* Added for horizontal scrollbar */
+    }
+
+    .container::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+    }
+
+    .container::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 4px;
+    }
+
+    .container::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+
+    /* Table styling */
+    h2 {
+        color: black;
+        margin-bottom: 20px;
+        position: sticky;
+        top: 0;
+        background-color: #fff;
+        padding: 10px 0;
+        z-index: 2;
+    }
+
+    .table-container {
+        margin-top: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 900px; /* Minimum width for the table */
+    }
+
+    thead {
+        position: sticky;
+        top: 50px;
+        z-index: 1;
+        background-color: #5eb1e6;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 12px 15px;
+        text-align: left;
+    }
+
+    th {
+        color: white;
+        font-weight: 500;
+    }
+
+    /* Button styling */
+    button,
+    .btn-edit,
+    .btn-hapus {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+        margin: 0 4px;
+        transition: background-color 0.2s;
+    }
+
+    .btn-edit {
+        background-color: #5eb1e6;
+        color: white;
+    }
+
+    .btn-edit:hover {
+        background-color: #4a9ed0;
+    }
+
+    .btn-hapus {
+        background-color: #f44336;
+        color: white;
+    }
+
+    .btn-hapus:hover {
+        background-color: #e53935;
+    }
+
+    .btn-secondary {
+        background-color: #f44336;
+        padding: 10px 20px;
+        width: auto;
+        min-width: 120px;
+    }
+
+    .btn-secondary:hover {
+        background-color: #e53935;
+    }
+</style>
 <body>
     @include('template.sidebarmanager')
     <div class="dashboard-content">
@@ -106,7 +180,7 @@
                                 @method('DELETE')
                                 <button type="submit" class="btn-hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus layanan ini?')">Hapus</button>
                             </form>
-                        </td>                        
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -116,7 +190,7 @@
             <div>
                 <a href="{{ route('manager.dashboard') }}" class="btn btn-secondary">Back</a>
             </div>
-        </div>      
+        </div>
     </div>
 </body>
 </html>

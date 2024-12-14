@@ -78,13 +78,3 @@
 .navbar button:hover {
     background-color: #c0392b;
 }
-
-.dashboard-content {
-    margin-left: 250px;
-    padding: 20px;
-    min-height: 100vh;
-    background-image: url("../img/dash.png");
-    background-position: flex;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-}

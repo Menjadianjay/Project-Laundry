@@ -10,16 +10,36 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/da.css') }}">
     <style>
-        .container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 500px;
-            text-align: center;
-            margin: 50px auto;
+        html, body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+        height: 100%;
         }
 
+        body {
+            background-image: url("{{ asset('img/dash.png') }}");
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+            background-color: #ffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 5 0 10px rgba(0, 0, 0, 0.1);
+            width: 500px;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 60%;
+            transform: translate(-50%, -50%);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
         h3 {
             color: #333;
             margin-bottom: 20px;
@@ -78,7 +98,7 @@
         .form-group {
             text-align: left;
         }
-        
+
         .form-group.d-flex {
             justify-content: space-between;
             display: flex;
@@ -102,27 +122,32 @@
                     <input type="text" id="namaPelanggan" name="namaPelanggan" placeholder="Masukkan nama pelanggan" required>
                 </div>
                 <div class="form-group">
-                    <label for="jenisLayanan">Jenis Layanan:</label>
-                    <select id="jenisLayanan" name="jenisLayanan" required>
-                        <option value="" disabled selected>Pilih jenis layanan</option>
-                        <option value="Cuci setrika">Cuci Setrika</option>
-                        <option value="Cuci lipat">Cuci Lipat</option>
-                        <option value="Setrika saja">Setrika Saja</option>
-                    </select>
+                    <label for="noTelp">No. Telp:</label>
+                    <input type="text" id="noTelp" name="noTelp" placeholder="Masukkan nomor telepon pelanggan" required>
                 </div>
                 <div class="form-group">
-                    <label for="jenisLaundry">Jenis Laundry:</label>
-                    <select id="jenisLaundry" name="jenisLaundry" required>
-                        <option value="" disabled selected>Pilih jenis laundry</option>
-                        <option value="Express">Express</option>
-                        <option value="2 hari">2 Hari</option>
-                        <option value="3 hari">3 Hari</option>
+                    <label for="alamat">Alamat:</label>
+                    <textarea id="alamat" name="alamat" placeholder="Masukkan alamat pelanggan" rows="3" required></textarea>
+                </div>
+
+                <!-- Pilihan Layanan -->
+                <div class="form-group">
+                    <label for="layanan">Layanan Laundry :</label>
+                    <select id="layanan" name="layanan" required>
+                        <option value="" disabled selected>Pilih layanan</option>
+                        @foreach($laundries as $laundry)
+                            <option value="{{ $laundry->jenis_layanan }} - {{ $laundry->durasi_layanan }}">
+                                {{ $laundry->jenis_layanan }} - {{ $laundry->durasi_layanan }}
+                            </option>
+                        @endforeach
                     </select>
                 </div>
+
                 <div class="form-group">
                     <label for="berat">Berat (kg):</label>
                     <input type="number" id="berat" name="berat" placeholder="Masukkan berat laundry" required>
                 </div>
+
                 <div class="form-group">
                     <label>Metode Pembayaran:</label>
                     <div class="form-check">
@@ -134,15 +159,14 @@
                         <label class="form-check-label" for="transfer">Transfer</label>
                     </div>
                 </div>
+
                 <div class="form-group d-flex">
-                    <button type="button" class="btn btn-secondary" onclick="window.location.href='{{ Auth::user()->name === 'pegawai' ? route('manager.dashboard') : route('pegawai.dashboard') }}'">Batal</button>
-                    <button type="submit" class="btn btn-primary">Simpan Transaksi</button>                
+                    <button type="button" class="btn btn-secondary" onclick="window.location.href='{{ route('pegawai.dashboard') }}'">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan Transaksi</button>
                 </div>
             </form>
-        </div>       
+        </div>
     </div>
-    
-
 </body>
 
 </html>

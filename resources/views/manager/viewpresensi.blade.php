@@ -10,13 +10,34 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/da.css') }}">
     <style>
+        html, body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        }
+
+        body {
+            background-image: url("{{ asset('img/dash.png') }}");
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+        }
         .container {
-            background-color: #fff;
-            padding: 30px; /* Padding yang lebih besar */
+            background-color: #ffff;
+            padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 5 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 60%;
+            transform: translate(-50%, -50%);
+            max-height: 90vh;
+            overflow-y: auto;
             width: 1000px; /* Ukuran lebar container */
-            margin: 50px auto; /* Margin yang lebih kecil */
         }
 
         h2 {
@@ -139,7 +160,7 @@
                         <td class="btn-actions">
                             <!-- Tombol Edit -->
                             <a href="{{ route('presensi.edit', $presensi->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                        
+
                             <!-- Tombol Hapus -->
                             <form action="{{ route('presensi.destroy', $presensi->id) }}" method="POST" style="display:inline;">
                                 @csrf
@@ -147,7 +168,7 @@
                                 <button type="submit" class="btn btn-secondary btn-sm" style="background-color: #e53935; color: white;" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">Hapus</button>
                             </form>
                         </td>
-                        
+
                     </tr>
                     @endforeach
                 </tbody>
@@ -161,7 +182,7 @@
             <div class="btn-group">
                 <a href="{{ route('manager.dashboard') }}" class="btn btn-secondary">Back</a>
             </div>
-        </div>    
+        </div>
     </div>
 
 </body>

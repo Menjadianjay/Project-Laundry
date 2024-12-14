@@ -10,13 +10,35 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/da.css') }}">
     <style>
+        html, body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        }
+
+        body {
+            background-image: url("{{ asset('img/dash.png') }}");
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+        }
+
         .container {
-            background-color: #fff;
-            padding: 20px; /* Ubah padding container */
+            background-color: #ffff;
+            padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: auto; /* Lebar container lebih kecil */
-            margin: 30px auto; /* Ubah margin */
+            box-shadow: 5 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 60%;
+            transform: translate(-50%, -50%);
+            max-height: 90vh;
+            overflow-y: auto;
+            width: auto;
         }
 
         h2 {
@@ -44,7 +66,7 @@
         .btn {
             padding: 3px; /* Kurangi padding tombol */
             font-size: 0.7em; /* Ukuran font tombol lebih kecil */
-            width: 60px; /* Lebar tombol lebih kecil */
+            width: 50px; /* Lebar tombol lebih kecil */
         }
 
         .btn-actions {
@@ -68,7 +90,6 @@
     <div class="dashboard-content">
         <div class="container">
             <h2>View Transaksi Laundry</h2>
-
             @if ($transactions->count() > 0)
             <table class="table table-striped">
                 <thead>

@@ -7,80 +7,98 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/da.css') }}">
-    <style>
-        .container {
-            background-color: #ffff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 5 0 10px rgba(0, 0, 0, 0.1);
-            width: 500px;
-            text-align: center;
-            margin: 0 auto;
-            margin-top: 50px;
-        }
-
-        h2 {
-            color: black;
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            text-align: left;
-        }
-
-        input[type="text"],
-        input[type="number"],
-        select,
-        textarea {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-
-        button {
-            background-color: #5eb1e6;
-            color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 30%;
-        }
-
-        button:hover {
-            background-color: #007bff;
-        }
-
-        .btn-batal {
-            background-color: #f44336;
-            color: white;
-        }
-
-        .btn-batal:hover {
-            background-color: #e53935;
-        }
-
-        .form-check {
-            display: inline-flex;
-            margin-right: 10px;
-        }
-
-        .form-group {
-            text-align: left;
-        }
-
-        .form-group.d-flex {
-            justify-content: space-between;
-            display: flex;
-        }
-    </style>
 </head>
+<style>
+    html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    }
 
+    body {
+        background-image: url("{{ asset('img/dash.png') }}");
+        height: 100vh;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .container {
+        background-color: #ffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 5 0 10px rgba(0, 0, 0, 0.1);
+        width: 500px;
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 60%;
+        transform: translate(-50%, -50%);
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+   h2 {
+        color: black;
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        text-align: left;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select,
+    textarea {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    button {
+        background-color: #5eb1e6;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 30%;
+    }
+
+    button:hover {
+        background-color: #007bff;
+    }
+
+    .btn-batal {
+        background-color: #f44336;
+        color: white;
+    }
+
+    .btn-batal:hover {
+        background-color: #e53935;
+    }
+
+    .form-check {
+        display: inline-flex;
+        margin-right: 10px;
+    }
+
+    .form-group {
+        text-align: left;
+    }
+
+    .form-group.d-flex {
+        justify-content: space-between;
+        display: flex;
+    }
+</style>
 <body>
     @include('template.sidebarmanager')
     <div class="dashboard-content">
@@ -88,7 +106,7 @@
             <h2>Input Jenis dan Tarif Layanan Laundry</h2>
             <form action="{{ route('manager.storelayanan') }}" method="POST">
                 @csrf <!-- Tambahkan CSRF token untuk keamanan -->
-                
+
                 <div class="form-group">
                     <label>Jenis Laundry:</label>
                     <div class="form-check">
@@ -123,10 +141,10 @@
 
                 <div class="form-group d-flex">
                     <button type="button" class="btn btn-batal" onclick="window.location.href='{{ route('manager.dashboard') }}'">Batal</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>                
+                    <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
             </form>
-        </div>      
+        </div>
     </div>
 </body>
 </html>

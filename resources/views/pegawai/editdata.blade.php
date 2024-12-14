@@ -10,19 +10,36 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/da.css') }}">
     <style>
-        body {
-            background-image: url("{{ asset('img/dash.png') }}");
-        }
-        .container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 500px;
-            margin: 50px auto;
-            text-align: center;
+        html, body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+        height: 100%;
         }
 
+        body {
+            background-image: url("{{ asset('img/dash.png') }}");
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+            background-color: #ffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 5 0 10px rgba(0, 0, 0, 0.1);
+            width: 500px;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 60%;
+            transform: translate(-50%, -50%);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
         h3 {
             color: #333;
             margin-bottom: 20px;
@@ -94,6 +111,7 @@
 </head>
 
 <body>
+        @include('template.sidebarpegawai')
         <div class="container">
             <h3>Edit Transaksi Laundry</h3>
             <form action="{{ route('pegawai.update', $transaction->id) }}" method="POST">

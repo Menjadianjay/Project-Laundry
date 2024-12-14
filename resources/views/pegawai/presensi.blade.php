@@ -80,18 +80,18 @@
 
 <body>
     @include('template.sidebarpegawai')
-    <div class="dashboard-content"> 
+    <div class="dashboard-content">
         <form action="{{ route('presensi.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="container">
                 <h2>Input Presensi Pegawai</h2>
-    
+
                 <!-- Nama Pegawai (readonly, diisi otomatis dengan nama user login) -->
                 <div class="form-group">
                     <label for="nama">Nama Pegawai</label>
                     <input type="text" id="nama" name="nama" value="{{ Auth::user()->name }}" readonly>
                 </div>
-    
+
                 <div class="form-group">
                     <label for="kehadiran">Kehadiran</label>
                     <select id="kehadiran" name="kehadiran">
@@ -101,25 +101,25 @@
                         <option value="Ijin">Ijin</option>
                     </select>
                 </div>
-    
+
                 <div class="form-group">
                     <label for="keterangan">Keterangan Ijin</label>
                     <textarea id="keterangan" name="keterangan" rows="4"></textarea>
                 </div>
-    
+
                 <div class="form-group">
                     <label for="upload">Upload Surat Keterangan Sakit</label>
                     <input type="file" id="upload" name="upload">
                 </div>
-    
+
                 <div class="form-group d-flex">
                     <a href="{{ route('pegawai.dashboard') }}" class="btn btn-secondary">Back</a>
                     <button type="submit" class="btn btn-success">Simpan</button>
                 </div>
             </div>
-        </form>     
+        </form>
     </div>
-    
+
 </body>
 
 </html>

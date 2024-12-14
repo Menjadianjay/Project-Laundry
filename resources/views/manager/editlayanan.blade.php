@@ -7,12 +7,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    {{-- <link rel="stylesheet" href="{{ asset('css/da.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('css/da.css') }}">
     <style>
+        html, body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        }
+
         body {
             background-image: url("{{ asset('img/dash.png') }}");
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
         }
-    
+
         .container {
             background-color: #fff;
             padding: 20px;
@@ -22,18 +34,18 @@
             margin: 50px auto;
             text-align: center;
         }
-    
+
         h2 {
             color: #333;
             margin-bottom: 20px;
         }
-    
+
         label {
             display: block;
             margin-bottom: 5px;
             text-align: left;
         }
-    
+
         input[type="text"],
         input[type="number"],
         input[type="date"],
@@ -46,7 +58,7 @@
             border-radius: 4px;
             box-sizing: border-box;
         }
-    
+
         button {
             background-color: #5eb1e6;
             color: white;
@@ -56,11 +68,11 @@
             cursor: pointer;
             width: 30%;
         }
-    
+
         button:hover {
             background-color: #007bff;
         }
-    
+
         .btn-batal {
             background-color: #f44336;
             color: white;
@@ -69,24 +81,24 @@
             border-radius: 4px;
             padding: 10px;
         }
-    
+
         .btn-batal:hover {
             background-color: #e53935;
         }
-    
+
         .form-check-label {
             margin-left: 5px;
         }
-    
+
         .form-check {
             display: inline-flex;
             margin-right: 10px;
         }
-    
+
         .form-group {
             text-align: left;
         }
-    
+
         .form-group.d-flex {
             justify-content: space-between;
             display: flex;
@@ -120,11 +132,12 @@
         background-color: #c82333;
     }
     </style>
-    
+
 </head>
 
 <body>
     <div class="dashboard-content">
+        @include('template.sidebarmanager')
         <div class="container">
             <h2>Edit Jenis dan Tarif Layanan Laundry</h2>
             <form action="{{ route('manager.updatelayanan', $laundry->id) }}" method="POST">
@@ -134,12 +147,12 @@
                 <div class="form-group">
                     <label>Jenis Laundry:</label>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" id="kiloan" name="jenis_laundry" value="kiloan" 
+                        <input class="form-check-input" type="radio" id="kiloan" name="jenis_laundry" value="kiloan"
                             {{ $laundry->jenis_laundry == 'kiloan' ? 'checked' : '' }} required>
                         <label class="form-check-label" for="kiloan">Kiloan</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" id="satuan" name="jenis_laundry" value="satuan" 
+                        <input class="form-check-input" type="radio" id="satuan" name="jenis_laundry" value="satuan"
                             {{ $laundry->jenis_laundry == 'satuan' ? 'checked' : '' }} required>
                         <label class="form-check-label" for="satuan">Satuan</label>
                     </div>

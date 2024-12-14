@@ -38,8 +38,8 @@
             left: 60%;
             transform: translate(-50%, -50%);
             max-height: 90vh;
-            overflow-y: auto;
         }
+
         h3 {
             color: #333;
             margin-bottom: 20px;
@@ -54,7 +54,8 @@
         input[type="text"],
         input[type="number"],
         input[type="date"],
-        select {
+        select,
+        textarea {
             width: 100%;
             padding: 8px;
             margin-bottom: 15px;
@@ -91,7 +92,7 @@
         }
 
         .form-check {
-            display:inline-flex;
+            display: inline-flex;
             margin-right: 10px;
         }
 

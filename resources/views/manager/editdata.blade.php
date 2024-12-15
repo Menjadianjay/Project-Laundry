@@ -106,7 +106,7 @@
                 </div>
                 <div class="form-group">
                     <label for="namaPelanggan">Nama Pelanggan</label>
-                    <input type="text" class="form-control" id="namaPelanggan" name="namaPelanggan" required value="{{ $transaction->nama_pelanggan }}">
+                    <input type="text" class="form-control" id="namaPelanggan" name="namaPelanggan" required value="{{ $transaction->pelanggan->nama }}">
                 </div>
                 <div class="form-group">
                     <label for="jenisLayanan">Jenis Layanan</label>

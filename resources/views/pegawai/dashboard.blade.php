@@ -9,51 +9,99 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/da.css') }}">
-</head>
-<style>
+    <style>
         html, body {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        position: fixed;
-        width: 100%;
-        height: 100%;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
             background-image: url("{{ asset('img/dash.png') }}");
-            height: 100vh;
             background-size: cover;
             background-position: center;
         }
 
+        .navbar {
+        text-align: center;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 10px 0;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        display: grid; /* Add this line */
+        place-items: center; /* Add this line */
+        }
+
+        .navbar h1 {
+            margin: 0;
+            color: #333;
+            font-size: 1.5rem;
+        }
+
+        .dashboard-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+            text-align: center;
+
+        }
+
         .container {
-            background-color: #ffff;
+            background-color: #fff;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 5 0 10px rgba(0, 0, 0, 0.1);
-            width: 500px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 500px;
             text-align: center;
-            position: absolute;
-            top: 50%;
-            left: 60%;
-            transform: translate(-50%, -50%);
-            max-height: 90vh;
             overflow-y: auto;
+
         }
-        h1{
+
+        h1 {
             background-color: white;
             color: black;
+
         }
-</style>
+
+        @media screen and (max-width: 768px) {
+            .navbar h1 {
+                font-size: 1.2rem;
+            }
+
+            .container {
+                width: 95%;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .navbar h1 {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
 <body>
     <div class="navbar">
-        <h1>Selamat Datang  {{ Auth::user()->name }}</h1>
+        <h1>Selamat Datang {{ Auth::user()->name }}</h1>
     </div>
     @include('template.sidebarpegawai')
     <div class="dashboard-content">
         <div class="container">
-            On Going
+            <h2>On Going</h2>
         </div>
     </div>
 </body>

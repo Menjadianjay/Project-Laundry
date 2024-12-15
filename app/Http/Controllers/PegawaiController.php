@@ -73,7 +73,7 @@ class PegawaiController extends Controller
 
     public function viewdata()
     {
-        $transactions = Transaction::all();
+        $transactions = Transaction::paginate(5);
         return view('pegawai.viewdata', compact('transactions'));
     }
 

@@ -12,49 +12,64 @@
     <link rel="stylesheet" href="{{ asset('css/da.css') }}">
     <style>
         html, body {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        position: fixed;
-        width: 100%;
-        height: 100%;
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+            width: 100%;
+            overflow-x: hidden;
         }
 
         body {
             background-image: url("{{ asset('img/dash.png') }}");
-            height: 100vh;
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .dashboard-content {
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
         }
 
         .container {
-            background-color: #ffff;
+            background-color: #fff;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 5 0 10px rgba(0, 0, 0, 0.1);
-            width: auto;
-            text-align: center;
-            position: absolute;
-            top: 30%;
-            left: 60%;
-            transform: translate(-50%, -50%);
-            max-height: 90vh;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 1400px;
+            margin: 20px;
+            position: relative;
+            left: 8%;
+            overflow-x: auto; /* Tambahkan scrollbar horizontal jika diperlukan */
         }
+
         h2 {
-            font-size: 1.3em; /* Ukuran font lebih kecil */
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #333;
         }
 
         table {
-            width: 100%;
-            margin-bottom: 10px;
+            width: 100%; /* Tabel menyesuaikan lebar kontainer */
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            table-layout: auto; /* Agar kolom tabel fleksibel sesuai konten */
         }
 
         th, td {
-            padding: 5px; /* Kurangi padding sel tabel */
+            padding: 10px 12px;
             text-align: left;
             border-bottom: 1px solid #ddd;
-            font-size: 0.57em; /* Ukuran font lebih kecil */
-            white-space: nowrap; /* Teks tetap dalam satu baris */
+            font-size: 0.9rem;
+            white-space: nowrap;
         }
 
         th {
@@ -62,25 +77,147 @@
             font-weight: bold;
         }
 
-        .btn {
-            padding: 3px; /* Kurangi padding tombol */
-            font-size: 0.7em; /* Ukuran font tombol lebih kecil */
-            width: 60px; /* Lebar tombol lebih kecil */
-        }
-
         .btn-actions {
             display: flex;
-            gap: 3px; /* Kurangi jarak antar tombol */
+            gap: 5px;
+            flex-wrap: nowrap;
+        }
+
+        .btn {
+            padding: 0.375rem 0.75rem;
+            font-size: 0.875rem;
+            min-width: 70px;
+            margin: 2px;
         }
 
         .alert {
-            padding: 8px; /* Kurangi padding alert */
-            font-size: 0.8em; /* Ukuran font alert lebih kecil */
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    align-items: center;
+}
+
+.pagination a {
+    color: #007bff;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    margin: 0 5px;
+    min-width: 10px;
+    height: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.pagination a:hover {
+    background-color: #f2f2f2;
+}
+
+.pagination .active {
+    background-color: #007bff;
+    color: white;
+}
+
+        /* Responsive Styles */
+        @media screen and (max-width: 1400px) {
+            .container {
+                width: 95%;
+                left: 5%;
+            }
         }
 
-        .alert-info {
-            background-color: #e8f4fa;
-            color: #31708f;
+        @media screen and (max-width: 992px) {
+            th, td {
+                padding: 10px;
+                font-size: 0.85rem;
+            }
+
+            .container {
+                width: 98%;
+                left: 1%;
+                margin: 10px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .container {
+                padding: 15px;
+                margin: 10px;
+                width: 100%;
+                left: 0;
+            }
+
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            tr {
+                margin-bottom: 15px;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                padding: 10px;
+                background: #fff;
+            }
+
+            td {
+                border: none;
+                position: relative;
+                padding-left: 50%;
+                text-align: right;
+                min-height: 40px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                white-space: normal;
+            }
+
+            td:before {
+                content: attr(data-label);
+                position: relative;
+                left: 0;
+                width: 45%;
+                padding-right: 10px;
+                text-align: left;
+                font-weight: bold;
+            }
+
+            .btn-actions {
+                justify-content: center;
+                padding-left: 0;
+            }
+
+            .btn-actions td:before {
+                content: none;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            h2 {
+                font-size: 1.2rem;
+            }
+
+            .container {
+                padding: 10px;
+            }
+
+            .btn {
+                width: 100%;
+                margin-bottom: 5px;
+            }
         }
     </style>
 </head>
@@ -112,18 +249,18 @@
                 <tbody>
                     @foreach ($transactions as $transaction)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $transaction->tanggal_masuk }}</td>
-                        <td>{{ $transaction->pelanggan->nama }}</td>
-                        <td>{{ $transaction->pelanggan->no_telp }}</td>
-                        <td>{{ $transaction->pelanggan->alamat }}</td>
-                        <td>{{ $transaction->laundry->jenis_layanan }}</td>
-                        <td>{{ $transaction->laundry->jenis_laundry }}</td>
-                        <td>{{ $transaction->laundry->durasi_layanan }}</td>
-                        <td>{{ $transaction->berat }}</td>
-                        <td>{{ $transaction->metode_pembayaran }}</td>
-                        <td>Rp {{ number_format($transaction->total_harga, 2, ',', '.') }}</td>
-                        <td class="btn-actions">
+                        <td data-label="No">{{ $loop->iteration }}</td>
+                        <td data-label="Tanggal Masuk">{{ $transaction->tanggal_masuk }}</td>
+                        <td data-label="Nama Pelanggan">{{ $transaction->pelanggan->nama }}</td>
+                        <td data-label="No Telp">{{ $transaction->pelanggan->no_telp }}</td>
+                        <td data-label="Alamat">{{ $transaction->pelanggan->alamat }}</td>
+                        <td data-label="Jenis Layanan">{{ $transaction->laundry->jenis_layanan }}</td>
+                        <td data-label="Jenis Laundry">{{ $transaction->laundry->jenis_laundry }}</td>
+                        <td data-label="Durasi Layanan">{{ $transaction->laundry->durasi_layanan }}</td>
+                        <td data-label="Berat">{{ $transaction->berat }}</td>
+                        <td data-label="Metode Pembayaran">{{ $transaction->metode_pembayaran }}</td>
+                        <td data-label="Total Harga">Rp {{ number_format($transaction->total_harga, 2, ',', '.') }}</td>
+                        <td data-label="Aksi" class="btn-actions">
                             <a href="{{ route('pegawai.editdata', ['id' => $transaction->id]) }}" class="btn btn-warning btn-sm">Edit</a>
                             <form action="{{ route('pegawai.delete', ['id' => $transaction->id]) }}" method="POST" style="display:inline;">
                                 @csrf
@@ -135,20 +272,25 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="pagination">
+                @for ($i = 1; $i <= $transactions->lastPage(); $i++)
+                    <a href="{{ $transactions->url($i) }}" class="{{ $transactions->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a>
+                @endfor
+            </div>
             @else
             <div class="alert alert-info text-center">
                 Tidak ada data transaksi yang tersedia.
             </div>
             @endif
-            <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="d-flex justify-content-between align-items-center">
                 <a href="{{ route('pegawai.dashboard') }}" class="btn btn-secondary">Back</a>
             </div>
         </div>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

@@ -53,7 +53,8 @@ Route::get('/pegawai/viewpresensi', [PresensiController::class, 'viewpresensi'])
 
 // Route untuk melihat file yang diupload
 Route::get('/presensi/{id}/file', [PresensiController::class, 'showFile'])->name('presensi.file');
-
+//membuat waktu batasan presensi pegawai
+//Route::post('pegawai/presensi', [PresensiController::class, 'waktupresensi'])->middleware(['auth', 'verified'])->name('pegawai.presensi');
 
 // Manager
 Route::get('/manager/dashboard', [ManagerController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('manager.dashboard');
@@ -78,8 +79,6 @@ Route::get('manager/viewpresensi', [PresensiController::class, 'viewpresensiMana
 Route::get('/presensi/{id}/edit', [PresensiController::class, 'editpresensi'])->middleware(['auth', 'verified'])->name('presensi.edit');
 Route::put('/presensi/{id}', [PresensiController::class, 'update'])->middleware(['auth', 'verified'])->name('presensi.update');
 Route::delete('/presensi/{id}', [PresensiController::class, 'destroy'])->middleware(['auth', 'verified'])->name('presensi.destroy');
-
-
 
 Route::get('/manager/inputlayanan', [LaundryController::class, 'create'])->name('manager.inputlayanan');
 Route::post('/manager/inputlayanan', [LaundryController::class, 'store'])->name('manager.storelayanan');

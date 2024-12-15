@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Presensi;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class PresensiController extends Controller
 {
-        public function presensi()
+    public function presensi()
     {
         return view('pegawai.presensi');
     }
@@ -56,17 +57,31 @@ class PresensiController extends Controller
             return redirect()->intended(route('pegawai.dashboard'));
         }
     }
+    // public function waktupresensi(request $request)
+    // {
+    //     $userId = Auth::user();
+
+    //     // Cek apakah pengguna sudah presensi dalam 24 jam terakhir
+    //     $lastPresence = Presensi::where('user_id', $userId)
+    //         ->where('created_at', '>=', Carbon::now()->subDay())
+    //         ->first();
+
+    //     if ($lastPresence) {
+    //         // Jika sudah presensi dalam 24 jam terakhir
+    //         return redirect()->back()->with('error', 'Anda sudah melakukan presensi dalam 24 jam terakhir.');
+    //     }
+    // }
 
     // Menampilkan data presensi dalam bentuk tabel di dashboard Pegawai
     public function viewpresensi()
     {
-        $presensis = Presensi::all(); // Mengambil semua data presensi dari database
+        $presensis = Presensi::paginate(5); // Mengambil semua data presensi dari database
         return view('pegawai.viewpresensi', compact('presensis'));
     }
     // Menampilkan data presensi dalam bentuk tabel di dashboard Manager
     public function viewpresensiManager()
     {
-        $presensis = Presensi::all(); // Mengambil semua data presensi dari database
+        $presensis = Presensi::paginate(5); // Mengambil semua data presensi dari database
         return view('manager.viewpresensi', compact('presensis'));
     }
 
@@ -92,7 +107,7 @@ class PresensiController extends Controller
         }
     }
 
-        // Menampilkan form edit presensi
+    // Menampilkan form edit presensi
     public function editpresensi($id)
     {
         $presensi = Presensi::findOrFail($id);
@@ -142,5 +157,4 @@ class PresensiController extends Controller
         // Redirect dengan pesan sukses
         return redirect()->route('manager.viewpresensi')->with('success', 'Presensi berhasil dihapus.');
     }
-
 }

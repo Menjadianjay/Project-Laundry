@@ -13,7 +13,7 @@ class PresensiController extends Controller
     {
         $now = Carbon::now();
         $startTime = Carbon::createFromTime(8, 0, 0);
-        $endTime = Carbon::createFromTime(17, 0, 0);
+        $endTime = Carbon::createFromTime(19, 0, 0);
         return $now->between($startTime, $endTime);
     }
 
@@ -29,7 +29,7 @@ class PresensiController extends Controller
         $sudahPresensi = Presensi::where('nama', $nama)
             ->whereDate('created_at', Carbon::today())
             ->whereTime('created_at', '>=', '08:00:00')
-            ->whereTime('created_at', '<=', '17:00:00')
+            ->whereTime('created_at', '<=', '19:00:00')
             ->exists();
 
         return view('pegawai.presensi', compact('sudahPresensi', 'isWithinWorkHours'));
@@ -44,7 +44,7 @@ class PresensiController extends Controller
     {
         // Validasi waktu kerja
         if (!$this->isWorkingHours()) {
-            return redirect()->back()->with('error', 'Presensi hanya dapat dilakukan antara jam 08:00 - 17:00');
+            return redirect()->back()->with('error', 'Presensi hanya dapat dilakukan pada jam 08:00 - 19:00');
         }
 
         // Ambil nama user yang login
@@ -54,7 +54,7 @@ class PresensiController extends Controller
         $sudahPresensi = Presensi::where('nama', $nama)
             ->whereDate('created_at', Carbon::today())
             ->whereTime('created_at', '>=', '08:00:00')
-            ->whereTime('created_at', '<=', '17:00:00')
+            ->whereTime('created_at', '<=', '19:00:00')
             ->exists();
 
         if ($sudahPresensi) {
@@ -70,9 +70,9 @@ class PresensiController extends Controller
                 'upload' => 'nullable|file|mimes:jpg,png,jpeg,pdf|max:2048',
             ]);
 
-            // Double check waktu kerja sebelum menyimpan
+            // cek lagi waktu kerja sebelum simpan input pegawai
             if (!$this->isWorkingHours()) {
-                return redirect()->back()->with('error', 'Presensi hanya dapat dilakukan antara jam 08:00 - 17:00');
+                return redirect()->back()->with('error', 'Presensi hanya dapat dilakukan pada jam 08:00 - 19:00');
             }
 
             // Jika ada file upload, simpan file dan dapatkan path-nya

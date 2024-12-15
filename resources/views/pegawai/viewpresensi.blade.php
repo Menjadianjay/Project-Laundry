@@ -152,35 +152,110 @@
         }
 
         .pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    margin-bottom: 5px;
-    align-items: center;
-}
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            margin-bottom: 5px;
+            align-items: center;
+        }
 
-.pagination a {
-    color: #007bff;
-    padding: 8px 16px;
-    text-decoration: none;
-    border: 1px solid #ddd;
-    margin: 0 5px;
-    min-width: 10px;
-    height: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-}
+        .pagination a {
+            color: #007bff;
+            padding: 8px 16px;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            margin: 0 5px;
+            min-width: 10px;
+            height: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
 
-.pagination a:hover {
-    background-color: #f2f2f2;
-}
+        .pagination a:hover {
+            background-color: #f2f2f2;
+        }
 
-.pagination .active {
-    background-color: #007bff;
-    color: white;
-}
+        .pagination .active {
+            background-color: #007bff;
+            color: white;
+        }
+
+        /* Media query untuk perangkat kecil (smartphone) */
+        @media (max-width: 768px) {
+            /* Container menjadi lebih kecil */
+            .container {
+                width: 90%;
+                padding: 10px;
+            }
+
+            /* Tabel menjadi scrollable */
+            .table-container {
+                overflow-x: auto;
+            }
+
+            table {
+                font-size: 0.8em;
+            }
+
+            /* Ubah font ukuran lebih kecil */
+            td, th {
+                padding: 8px;
+                font-size: 0.75em;
+            }
+
+            /* Elemen tombol lebih rapat */
+            .btn {
+                padding: 5px;
+                font-size: 0.75em;
+            }
+
+            /* Atur pagination */
+            .pagination a {
+                padding: 6px 10px;
+                font-size: 0.7em;
+            }
+
+            /* Sidebar dan konten dashboard */
+            .dashboard-content {
+                padding: 0;
+            }
+
+            .alert {
+                font-size: 0.85em;
+            }
+        }
+
+        /* Media query untuk perangkat sangat kecil (layar < 480px) */
+        @media (max-width: 480px) {
+            .container {
+                padding: 5px;
+            }
+
+            table {
+                font-size: 0.7em;
+            }
+
+            td, th {
+                padding: 6px;
+                font-size: 0.65em;
+            }
+
+            .btn {
+                padding: 4px;
+                font-size: 0.65em;
+            }
+
+            .pagination a {
+                padding: 4px 8px;
+                font-size: 0.6em;
+            }
+
+            h2 {
+                font-size: 1.2em;
+            }
+        }
     </style>
 </head>
 

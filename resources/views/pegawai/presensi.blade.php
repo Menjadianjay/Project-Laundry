@@ -26,6 +26,8 @@
             width: 500px;
             text-align: center;
             margin: 50px auto;
+            margin-top: 10%;
+            margin-left: 40%;
         }
         h2 {
             color: #333;
@@ -94,6 +96,8 @@
             justify-content: center;
             align-items: center;
             font-weight: bold;
+            margin-top: 5%;
+            margin-left: 5%;
         }
         .alert-success {
             background-color: #4CAF50;
@@ -125,10 +129,7 @@
 
 <body>
     @include('template.sidebarpegawai')
-    <div class="dashboard-content">
-
-        <!-- Pesan alert di tengah atas -->
-        @if (session('success'))
+    @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
             </div>
@@ -145,6 +146,9 @@
                 Anda sudah melakukan presensi hari ini.
             </div>
         @else
+    <div class="dashboard-content">
+        <!-- Pesan alert di tengah atas -->
+
             <form action="{{ route('presensi.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="container">

@@ -51,6 +51,7 @@
             position: relative;
             overflow-y: auto;
             max-height: 90vh;
+            margin-left: 40%;
         }
 
         h3 {

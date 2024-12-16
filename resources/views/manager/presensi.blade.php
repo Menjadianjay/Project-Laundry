@@ -130,9 +130,9 @@
                     </select>
                 </div>
 
-                <div class="form-group">
-                    <label for="keterangan">Keterangan Ijin</label>
-                    <textarea id="keterangan" name="keterangan" rows="4"></textarea>
+                <div class="form-group" id="keterangan-group" style="display: none;">
+                    <label for="keterangan">Keterangan</label>
+                    <textarea id="keterangan" name="keterangan" rows="4" class="form-control" placeholder="Masukkan keterangan"></textarea>
                 </div>
 
                 <div class="form-group">
@@ -147,7 +147,23 @@
             </div>
         </form>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const kehadiranSelect = document.getElementById("kehadiran");
+            const keteranganGroup = document.getElementById("keterangan-group");
 
+            function toggleKeterangan() {
+                if (kehadiranSelect.value !== "Hadir") {
+                    keteranganGroup.style.display = "block";
+                } else {
+                    keteranganGroup.style.display = "none";
+                }
+            }
+            toggleKeterangan();
+
+            kehadiranSelect.addEventListener("change", toggleKeterangan);
+        });
+    </script>
 </body>
 
 </html>

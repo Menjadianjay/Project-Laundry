@@ -178,7 +178,7 @@ class PresensiController extends Controller
     // Menampilkan data presensi dalam bentuk tabel di dashboard Pegawai
     public function viewpresensi()
     {
-        $presensis = Presensi::paginate(5); // Mengambil semua data presensi dari database
+        $presensis = Presensi::orderBy('created_at', 'desc')->paginate(5); // Mengambil semua data presensi dari database
         return view('pegawai.viewpresensi', compact('presensis'));
     }
     // Menampilkan data presensi dalam bentuk tabel di dashboard Manager

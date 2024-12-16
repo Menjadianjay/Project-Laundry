@@ -30,7 +30,7 @@ class LaundryController extends Controller
 
     public function viewlayanan()
     {
-        $laundries = Laundry::paginate(5);
+        $laundries = Laundry::orderBy('created_at', 'desc')->paginate(5);
         return view('manager.viewlayanan', compact('laundries'));
     }
 

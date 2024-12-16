@@ -272,6 +272,11 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="pagination">
+                @for ($i = 1; $i <= $transactions->lastPage(); $i++)
+                    <a href="{{ $transactions->url($i) }}" class="{{ $transactions->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a>
+                @endfor
+            </div>
             @else
             <div class="alert alert-info text-center">
                 Tidak ada data transaksi yang tersedia.

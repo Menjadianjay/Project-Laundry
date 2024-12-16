@@ -1,84 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Layanan Laundry</title>
+    <title>Dashboard Laundry</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/da.css') }}">
     <style>
-        html, body {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        }
-
         body {
+            font-family: 'Poppins', sans-serif;
             background-image: url("{{ asset('img/dash.png') }}");
-            height: 100vh;
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
         }
 
-        .container {
-            background-color: #ffff;
+        .dashboard-content {
+            margin-left: 250px; /* Adjust for sidebar width */
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 5 0 10px rgba(0, 0, 0, 0.1);
-            width: 500px;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columns for cards */
+            gap: 20px;
+            padding: 20px 0;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
             text-align: center;
-            position: absolute;
-            top: 50%;
-            left: 60%;
-            transform: translate(-50%, -50%);
-            max-height: 90vh;
-            overflow-y: auto;
-            margin-left:10%;
-        }
-        h1{
-            background-color: white;
-            color: black;
+            transition: transform 0.3s ease;
+            flex: 1;
         }
 
-        @media screen and (max-width: 768px) {
-            .navbar h1 {
-                font-size: 1.2rem;
-            }
+        .dashboard-card:hover {
+            transform: scale(1.05);
+        }
 
-            .container {
-                width: 95%;
+        .dashboard-card h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .dashboard-card .value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #5eb1e6;
+        }
+
+        .transaction-table-wrapper {
+            overflow-x: auto; /* Enable horizontal scroll for wrapper */
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .transaction-table {
+            width: 100%;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .transaction-table table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 700px; /* Minimum width for large tables */
+        }
+
+        .transaction-table th,
+        .transaction-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            white-space: nowrap; /* Prevent text wrapping in cells */
+        }
+
+        .transaction-table th {
+            background-color: rgb(218, 214, 214);
+            color: #333;
+        }
+
+        .transaction-table tbody tr:nth-child(even) {
+            background-color: #f9f9f9; /* Alternate row background for readability */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2 columns for smaller screens */
+                gap: 15px;
             }
         }
 
-        @media screen and (max-width: 480px) {
-            .navbar h1 {
-                font-size: 1rem;
+        @media (max-width: 576px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr; /* 1 column for mobile screens */
             }
 
-            .container {
-                padding: 15px;
-                font-size: 0.9rem;
+            .dashboard-content {
+                margin-left: 0;
+                padding: 10px;
             }
         }
     </style>
 </head>
-
 <body>
-    <div class="navbar">
-        <h1>Selamat Datang {{ Auth::user()->name }}</h1>
-    </div>
+    <!-- Sidebar Include -->
     @include('template.sidebarpegawai')
+
+    <!-- Dashboard Content -->
     <div class="dashboard-content">
-        <div class="container">
-            <h2>On Going</h2>
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <h3>Total Transaksi</h3>
+                <div class="value">{{ $transactionCount }}</div>
+                <p>Jumlah Transaksi Saat Ini</p>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>Total Pendapatan</h3>
+                <div class="value">Rp {{ number_format($totalIncome, 0, ',', '.') }}</div>
+                <p>Total Pendapatan Laundry</p>
+            </div>
+
+            <div class="dashboard-card">
+                <h3>Transaksi Terakhir</h3>
+                @if($transactions->count() > 0)
+                    @php
+                        $latestTransaction = $transactions->last();
+                    @endphp
+                    <div class="value">{{ $latestTransaction->tanggal_masuk }}</div>
+                @else
+                    <p>Tidak ada transaksi</p>
+                @endif
+            </div>
+        </div>
+
+        <!-- Transaction Table -->
+        <div class="transaction-table-wrapper">
+            <div class="transaction-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Tanggal</th>
+                            <th>Nama Pelanggan</th>
+                            <th>Layanan</th>
+                            <th>Total Harga</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($transactions->take(5) as $transaction)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $transaction->tanggal_masuk }}</td>
+                            <td>{{ $transaction->pelanggan->nama }}</td>
+                            <td>{{ $transaction->laundry->jenis_layanan }}</td>
+                            <td>Rp {{ number_format($transaction->total_harga, 0, ',', '.') }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </body>
-
 </html>

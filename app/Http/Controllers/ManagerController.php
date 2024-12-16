@@ -9,10 +9,22 @@ use App\Models\Pelanggan;
 
 class ManagerController extends Controller
 {
+
     public function dashboard()
     {
-        return view('manager.dashboard');
+        $transactions = Transaction::with(['pelanggan', 'laundry'])->get();
+        $totalIncome = $transactions->sum('total_harga');
+        $transactionCount = $transactions->count();
+        $laundryCount = Laundry::count(); // Hitung jumlah layanan
+
+        return view('manager.dashboard', [
+            'transactions' => $transactions,
+            'totalIncome' => $totalIncome,
+            'transactionCount' => $transactionCount,
+            'laundryCount' => $laundryCount, // Kirim ke view
+        ]);
     }
+
 
     public function inputdata()
     {

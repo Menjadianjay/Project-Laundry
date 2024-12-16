@@ -11,7 +11,20 @@ class PegawaiController extends Controller
 {
     public function dashboard()
     {
-        return view('pegawai.dashboard');
+
+        $transactions = Transaction::all();
+
+        // Calculate total income
+        $totalIncome = $transactions->sum('total_harga');
+
+        // Get transaction count
+        $transactionCount = $transactions->count();
+
+        return view('pegawai.dashboard', [
+            'transactions' => $transactions,
+            'totalIncome' => $totalIncome,
+            'transactionCount' => $transactionCount
+        ]);
     }
 
     public function inputdata()

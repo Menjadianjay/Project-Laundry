@@ -71,7 +71,7 @@ class PegawaiController extends Controller
 
     public function viewData()
     {
-        $transactions = Transaction::with(['pelanggan', 'laundry'])->get();
+        $transactions = Transaction::with(['pelanggan', 'laundry'])->paginate(5);
         return view('pegawai.viewdata', compact('transactions'));
     }
 

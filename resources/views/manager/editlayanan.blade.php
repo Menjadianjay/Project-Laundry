@@ -123,7 +123,6 @@
 
 <body>
     <div class="dashboard-content">
-        @include('template.sidebarmanager')
         <div class="container">
             <h2>Edit Jenis dan Tarif Layanan Laundry</h2>
             <form action="{{ route('manager.updatelayanan', $laundry->id) }}" method="POST">

@@ -22,7 +22,6 @@
         </div>
     </section>
 
-    <!-- Layanan Kami Section -->
     <section class="container my-5">
         <h3 style="text-align: center;">Layanan Podomoro Laundry</h3>
         <br>
@@ -30,59 +29,16 @@
             @foreach ($laundries as $laundry)
             <div class="col-md-4">
                 <div class="carde">
-                    <h3 class="card-title">{{$laundry->jenis_layanan }}</h3>
-                    <p class="card-text">{{$laundry->keterangan }}</p>
-                    <p class="card-info"><b>Mulai dari Harga {{$laundry->tarif_layanan }}-/kg</b></p>
+                    <h3 class="card-title text-primary">{{$laundry->jenis_laundry}}</h3>
+                    <h4 class="card-title">{{$laundry->jenis_layanan}} - {{$laundry->durasi_layanan}}</h4>
+                    <p class="card-text">{{$laundry->keterangan}}</p>
+                    <p class="card-info"><b>Harga {{$laundry->tarif_layanan}}-/kg</b></p>
+                    <a href="http://wa.me/628985552417" class="btn btn-primary">Pesan sekarang</a>
                 </div>
             </div>
             @endforeach
         </div>
     </section>
-
-
-    <!-- Layanan Laundry Section -->
-    <section class="container my-5">
-        <h3 style="text-align: center;">Durasi Layanan</h3>
-        <br>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    <!-- <img src="4.png" class="card-img-top" alt="Layanan 1"> -->
-                    <div class="card-body">
-                        <h3 class="card-title"><b>Express</b></h3>
-                        <p class="card-text">Proses selama 8 jam</p>
-                        <p class="card-info">Rp 5.000,-/kg</p>
-                        <a href="http://wa.me/628985552417" class="btn btn-primary">Pesan sekarang</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <!-- <img src="2.png" class="card-img-top" alt="Layanan 2"> -->
-                    <div class="card-body">
-                        <h3 class="card-title"><b>Kilat</b></h3>
-                        <p class="card-text">Proses selama 2 hari</p>
-                        <p class="card-info">Rp 4.000,-/kg</p>
-                        <a href="http://wa.me/628985552417" class="btn btn-primary">Pesan sekarang</a>
-
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <!-- <img src="3.png" class="card-img-top" alt="Layanan 3"> -->
-                    <div class="card-body">
-                        <h3 class="card-title"><b>Reguler</b></h3>
-                        <p class="card-text">Proses selama 3 hari</p>
-                        <p class="card-info">Rp 3.000,-/kg</p>
-                        <a href="http://wa.me/628985552417" class="btn btn-primary">Pesan sekarang</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <footer class="text-center footer py-3">
         <p>&copy; 2024 Podomoro Laundry. All rights reserved.</p>
     </footer>

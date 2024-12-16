@@ -6,14 +6,12 @@ use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Models\Laundry;
 use App\Models\Pelanggan;
-use Illuminate\Support\Facades\DB;
 
 class ManagerController extends Controller
 {
     public function dashboard()
     {
-        $transaksis = DB::table('transactions')->get();
-        return view('manager.dashboard', ['transaksis' => $transaksis]);
+        return view('manager.dashboard');
     }
 
     public function inputdata()
@@ -42,7 +40,6 @@ class ManagerController extends Controller
         $pelanggan = Pelanggan::updateOrCreate(
             ['nama' => $request->namaPelanggan],
             [
-                'nama' => $request->namaPelanggan,
                 'no_telp' => $request->noTelp,
                 'alamat' => $request->alamat,
             ]
@@ -73,23 +70,18 @@ class ManagerController extends Controller
     }
 
 
-
-    // public function viewdata()
-    // {
-    //     $transactions = Transaction::all();
-    //     return view('manager.viewdata', compact('transactions'));
-    // }
     public function viewData()
     {
-        $transactions = Transaction::with(['pelanggan', 'laundry'])->paginate(5);
+        $transactions = Transaction::with(['pelanggan', 'laundry'])->get();
         return view('manager.viewdata', compact('transactions'));
     }
 
 
     public function editdata($id)
     {
-        $transaction = Transaction::findOrFail($id);
-        return view('manager.editdata', compact('transaction'));
+        $transaction = Transaction::with('pelanggan', 'laundry')->findOrFail($id);
+        $laundries = Laundry::all();
+        return view('manager.editdata', compact('transaction', 'laundries'));
     }
 
     public function update(Request $request, $id)
@@ -97,25 +89,40 @@ class ManagerController extends Controller
         $request->validate([
             'tanggalMasuk' => 'required|date',
             'namaPelanggan' => 'required|string|max:255',
-            'jenisLayanan' => 'required|string',
-            'jenisLaundry' => 'required|string',
+            'noTelp' => 'required|string|max:15',
+            'alamat' => 'required|string',
+            'layanan' => 'required|string',
             'berat' => 'required|numeric',
             'metodePembayaran' => 'required|string',
         ]);
 
         $transaction = Transaction::findOrFail($id);
 
-        $totalHarga = Transaction::calculatePrice(
-            $request->jenisLayanan,
-            $request->jenisLaundry,
-            $request->berat
+        // Pecah layanan menjadi jenis layanan dan durasi layanan
+        [$jenisLayanan, $durasiLayanan] = explode(' - ', $request->layanan);
+
+        // Update pelanggan
+        $pelanggan = Pelanggan::updateOrCreate(
+            ['nama' => $request->namaPelanggan],
+            [
+                'no_telp' => $request->noTelp,
+                'alamat' => $request->alamat,
+            ]
         );
 
+        // Update laundry
+        $laundry = Laundry::where('jenis_layanan', $jenisLayanan)
+            ->where('durasi_layanan', $durasiLayanan)
+            ->firstOrFail();
+
+        // Hitung ulang total harga
+        $totalHarga = $laundry->tarif_layanan * $request->berat;
+
+        // Update transaksi
         $transaction->update([
             'tanggal_masuk' => $request->tanggalMasuk,
-            'nama_pelanggan' => $request->namaPelanggan,
-            'jenis_layanan' => $request->jenisLayanan,
-            'jenis_laundry' => $request->jenisLaundry,
+            'pelanggan_id' => $pelanggan->id,
+            'laundry_id' => $laundry->id,
             'berat' => $request->berat,
             'metode_pembayaran' => $request->metodePembayaran,
             'total_harga' => $totalHarga,

@@ -89,7 +89,7 @@
 </head>
 
 <body>
-    @include('template.sidebarmanager')
+    {{-- @include('template.sidebarmanager') --}}
     <form action="{{ route('presensi.update', $presensi->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')

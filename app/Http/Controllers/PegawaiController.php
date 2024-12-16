@@ -4,24 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Transaction;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Laundry;
 use App\Models\Pelanggan;
-use Illuminate\Support\Facades\DB;
 
 class PegawaiController extends Controller
 {
     public function dashboard()
     {
-        /*$transaksis = DB::table('transactions')->get();
-        return view('pegawai.dashboard', ['transaksis' => $transaksis]);*/
         return view('pegawai.dashboard');
     }
 
     public function inputdata()
     {
-        $laundries = DB::table('laundries')->get();
-        return view('pegawai.inputdata', ['laundries' => $laundries]);
+        // Ambil data jenis_layanan, nama_layanan, dan durasi_layanan dari tabel laundries
+        $laundries = Laundry::all();
+        return view('pegawai.inputdata', compact('laundries')); // return view dan data laundries ke view
     }
 
     public function store(Request $request)
@@ -68,19 +65,21 @@ class PegawaiController extends Controller
             'metode_pembayaran' => $request->metodePembayaran,
             'total_harga' => $totalHarga,
         ]);
+
         return redirect()->route('pegawai.dashboard')->with('success', 'Transaksi berhasil disimpan.');
     }
 
-    public function viewdata()
+    public function viewData()
     {
-        $transactions = Transaction::paginate(5);
+        $transactions = Transaction::with(['pelanggan', 'laundry'])->get();
         return view('pegawai.viewdata', compact('transactions'));
     }
 
     public function editdata($id)
     {
-        $transaction = Transaction::findOrFail($id);
-        return view('pegawai.editdata', compact('transaction'));
+        $transaction = Transaction::with('pelanggan', 'laundry')->findOrFail($id);
+        $laundries = Laundry::all();
+        return view('pegawai.editdata', compact('transaction', 'laundries'));
     }
 
     public function update(Request $request, $id)
@@ -88,25 +87,40 @@ class PegawaiController extends Controller
         $request->validate([
             'tanggalMasuk' => 'required|date',
             'namaPelanggan' => 'required|string|max:255',
-            'jenisLayanan' => 'required|string',
-            'jenisLaundry' => 'required|string',
+            'noTelp' => 'required|string|max:15',
+            'alamat' => 'required|string',
+            'layanan' => 'required|string',
             'berat' => 'required|numeric',
             'metodePembayaran' => 'required|string',
         ]);
 
         $transaction = Transaction::findOrFail($id);
 
-        $totalHarga = Transaction::calculatePrice(
-            $request->jenisLayanan,
-            $request->jenisLaundry,
-            $request->berat
+        // Pecah layanan menjadi jenis layanan dan durasi layanan
+        [$jenisLayanan, $durasiLayanan] = explode(' - ', $request->layanan);
+
+        // Update pelanggan
+        $pelanggan = Pelanggan::updateOrCreate(
+            ['nama' => $request->namaPelanggan],
+            [
+                'no_telp' => $request->noTelp,
+                'alamat' => $request->alamat,
+            ]
         );
 
+        // Update laundry
+        $laundry = Laundry::where('jenis_layanan', $jenisLayanan)
+            ->where('durasi_layanan', $durasiLayanan)
+            ->firstOrFail();
+
+        // Hitung ulang total harga
+        $totalHarga = $laundry->tarif_layanan * $request->berat;
+
+        // Update transaksi
         $transaction->update([
             'tanggal_masuk' => $request->tanggalMasuk,
-            'nama_pelanggan' => $request->namaPelanggan,
-            'jenis_layanan' => $request->jenisLayanan,
-            'jenis_laundry' => $request->jenisLaundry,
+            'pelanggan_id' => $pelanggan->id,
+            'laundry_id' => $laundry->id,
             'berat' => $request->berat,
             'metode_pembayaran' => $request->metodePembayaran,
             'total_harga' => $totalHarga,
@@ -114,6 +128,7 @@ class PegawaiController extends Controller
 
         return redirect()->route('pegawai.viewdata')->with('success', 'Transaksi berhasil diperbarui');
     }
+
 
     public function delete($id)
     {

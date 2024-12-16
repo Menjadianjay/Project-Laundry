@@ -249,18 +249,18 @@
                 <tbody>
                     @foreach ($transactions as $transaction)
                     <tr>
-                        <td data-label="No">{{ $loop->iteration }}</td>
-                        <td data-label="Tanggal Masuk">{{ $transaction->tanggal_masuk }}</td>
-                        <td data-label="Nama Pelanggan">{{ $transaction->pelanggan->nama }}</td>
-                        <td data-label="No Telp">{{ $transaction->pelanggan->no_telp }}</td>
-                        <td data-label="Alamat">{{ $transaction->pelanggan->alamat }}</td>
-                        <td data-label="Jenis Layanan">{{ $transaction->laundry->jenis_layanan }}</td>
-                        <td data-label="Jenis Laundry">{{ $transaction->laundry->jenis_laundry }}</td>
-                        <td data-label="Durasi Layanan">{{ $transaction->laundry->durasi_layanan }}</td>
-                        <td data-label="Berat">{{ $transaction->berat }}</td>
-                        <td data-label="Metode Pembayaran">{{ $transaction->metode_pembayaran }}</td>
-                        <td data-label="Total Harga">Rp {{ number_format($transaction->total_harga, 2, ',', '.') }}</td>
-                        <td data-label="Aksi" class="btn-actions">
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $transaction->tanggal_masuk }}</td>
+                        <td>{{ $transaction->pelanggan->nama }}</td>
+                        <td>{{ $transaction->pelanggan->no_telp }}</td>
+                        <td>{{ $transaction->pelanggan->alamat }}</td>
+                        <td>{{ $transaction->laundry->jenis_layanan }}</td>
+                        <td>{{ $transaction->laundry->jenis_laundry }}</td>
+                        <td>{{ $transaction->laundry->durasi_layanan }}</td>
+                        <td>{{ $transaction->berat }}</td>
+                        <td>{{ $transaction->metode_pembayaran }}</td>
+                        <td>Rp {{ number_format($transaction->total_harga, 2, ',', '.') }}</td>
+                        <td class="btn-actions">
                             <a href="{{ route('pegawai.editdata', ['id' => $transaction->id]) }}" class="btn btn-warning btn-sm">Edit</a>
                             <form action="{{ route('pegawai.delete', ['id' => $transaction->id]) }}" method="POST" style="display:inline;">
                                 @csrf
@@ -272,25 +272,19 @@
                     @endforeach
                 </tbody>
             </table>
-            <div class="pagination">
-                @for ($i = 1; $i <= $transactions->lastPage(); $i++)
-                    <a href="{{ $transactions->url($i) }}" class="{{ $transactions->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a>
-                @endfor
-            </div>
             @else
             <div class="alert alert-info text-center">
                 Tidak ada data transaksi yang tersedia.
             </div>
             @endif
-            <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex justify-content-between align-items-center mb-3">
                 <a href="{{ route('pegawai.dashboard') }}" class="btn btn-secondary">Back</a>
             </div>
         </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

@@ -199,6 +199,7 @@
                     <textarea id="alamat" name="alamat" placeholder="Masukkan alamat pelanggan" rows="3" required></textarea>
                 </div>
 
+                <!-- Pilihan Layanan -->
                 <div class="form-group">
                     <label for="layanan">Layanan Laundry :</label>
                     <select id="layanan" name="layanan" required>

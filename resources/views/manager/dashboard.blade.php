@@ -40,6 +40,7 @@
             transform: translate(-50%, -50%);
             max-height: 90vh;
             overflow-y: auto;
+            margin-left:10%;
         }
         h1{
             background-color: white;

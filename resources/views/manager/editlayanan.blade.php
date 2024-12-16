@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -10,19 +11,20 @@
     <link rel="stylesheet" href="{{ asset('css/da.css') }}">
     <style>
         html, body {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        position: fixed;
-        width: 100%;
-        height: 100%;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
             background-image: url("{{ asset('img/dash.png') }}");
-            height: 100vh;
             background-size: cover;
             background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .container {
@@ -30,8 +32,8 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 500px;
-            margin: 50px auto;
+            width: 90%;
+            max-width: 500px;
             text-align: center;
         }
 
@@ -48,7 +50,6 @@
 
         input[type="text"],
         input[type="number"],
-        input[type="date"],
         select,
         textarea {
             width: 100%;
@@ -66,7 +67,7 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            width: 30%;
+            width: 45%;
         }
 
         button:hover {
@@ -76,23 +77,20 @@
         .btn-batal {
             background-color: #f44336;
             color: white;
-            width: 15%;
-            text-align: center;
-            border-radius: 4px;
-            padding: 10px;
         }
 
         .btn-batal:hover {
             background-color: #e53935;
         }
 
-        .form-check-label {
-            margin-left: 5px;
+        .form-check {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
         }
 
-        .form-check {
-            display: inline-flex;
-            margin-right: 10px;
+        .form-check-label {
+            margin-left: 5px;
         }
 
         .form-group {
@@ -100,39 +98,27 @@
         }
 
         .form-group.d-flex {
-            justify-content: space-between;
             display: flex;
+            justify-content: space-between;
+            gap: 10px;
         }
 
-        .btn-edit {
-        background-color: #ffc107;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        padding: 5px;
-        font-size: 0.8em;
-        cursor: pointer;
-    }
+        @media (max-width: 768px) {
+            .form-group.d-flex {
+                flex-direction: column;
+            }
 
-    .btn-edit:hover {
-        background-color: #e0a800;
-    }
+            button {
+                width: 100%;
+            }
+        }
 
-    .btn-delete {
-        background-color: #dc3545;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        padding: 5px;
-        font-size: 0.8em;
-        cursor: pointer;
-    }
-
-    .btn-delete:hover {
-        background-color: #c82333;
-    }
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 1.2em;
+            }
+        }
     </style>
-
 </head>
 
 <body>

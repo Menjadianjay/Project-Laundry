@@ -11,141 +11,253 @@
 
 </head>
 <style>
-    html, body {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        width: 100%;
-        height: 100%;
-    }
+   <style>
+        /* Reset margin dan padding untuk memastikan elemen fullscreen */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
 
-    body {
-        background-image: url("{{ asset('img/dash.png') }}");
-        background-size: cover;
-        background-position: center;
-    }
+        /* Gaya dasar untuk body */
+        body {
+            background-image: url("{{ asset('img/dash.png') }}");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full viewport height */
+            font-family: 'Poppins', sans-serif; /* Menambahkan font Poppins */
+        }
 
-    .container {
-        background-color: #fff;
-        padding: 30px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        width: 75%;
-        height: 75vh;
-        margin: 5% 15%;
-        overflow-y: auto;
-        overflow-x: auto;
-    }
-    .dashboard-content {
-    margin-left: 250px;
-    min-height: 100vh;
-    background-image: url("../img/dash.png");
-    background-position: flex;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    }
+       /* Container styling */
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 95%; /* Increased from 90% */
+            max-width: 1200px; /* Increased from 800px */
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 60%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            overflow-x: auto;
+        }
 
-    /* Scrollbar styling */
-    .container::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;  /* Added for horizontal scrollbar */
-    }
+        /* Table container */
+        .table-container {
+            width: 100%;
+            margin-bottom: 20px;
+        }
 
-    .container::-webkit-scrollbar-track {
-        background: #f1f1f1;
-        border-radius: 4px;
-    }
+        /* Table styling */
+        table {
+            width: 120%;
+            table-layout: fixed;
+            margin-bottom: 0;
+        }
 
-    .container::-webkit-scrollbar-thumb {
-        background: #888;
-        border-radius: 4px;
-    }
+        /* Column widths */
+        table th:nth-child(1),
+        table td:nth-child(1) { /* jenis */
+            width: 15%;
+        }
 
-    .container::-webkit-scrollbar-thumb:hover {
-        background: #555;
-    }
+        table th:nth-child(2),
+        table td:nth-child(2) { /* nama */
+            width: 10%;
+        }
 
-    /* Table styling */
-    h2 {
-        color: black;
-        margin-bottom: 20px;
-        position: sticky;
-        top: 0;
-        background-color: #fff;
-        padding: 10px 0;
-        z-index: 2;
-    }
+        table th:nth-child(3),
+        table td:nth-child(3) { /* durasi */
+            width: 15%;
+        }
 
-    .table-container {
-        margin-top: 20px;
-    }
+        table th:nth-child(4),
+        table td:nth-child(4) { /* tarif */
+            width: 15%;
+        }
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        min-width: 900px; /* Minimum width for the table */
-    }
+        table th:nth-child(5),
+        table td:nth-child(5) { /* keterangan */
+            width: 15%;
+        }
+        table th:nth-child(6),
+        table td:nth-child(6) { /* aksi */
+            width: 15%;
+            min-width: 15% ;
+        }
 
-    thead {
-        position: sticky;
-        top: 50px;
-        z-index: 1;
-        background-color: #5eb1e6;
-    }
+        /* Cell styling */
+        td, th {
+            padding: 12px; /* Increased padding */
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+            font-size: 0.9em;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        /* Tombol */
+        .btn {
+            background-color: #5eb1e6;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8em;
+            text-align: center;
+            width: auto;
+            margin: 10px;
+        }
 
-    th, td {
-        border: 1px solid #ddd;
-        padding: 12px 15px;
-        text-align: left;
-    }
+        .btn:hover {
+            background-color: #007bff;
+        }
 
-    th {
-        color: white;
-        font-weight: 500;
-    }
+        /* Tombol dengan warna sekunder (merah) */
+        .btn-secondary {
+            background-color: #f44336;
+            color: white;
+            padding: 5px 10px;
+        }
 
-    /* Button styling */
-    button,
-    .btn-edit,
-    .btn-hapus {
-        padding: 8px 16px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        text-decoration: none;
-        display: inline-block;
-        margin: 0 4px;
-        transition: background-color 0.2s;
-    }
+        .btn-secondary:hover {
+            background-color: #e53935;
+        }
 
-    .btn-edit {
-        background-color: #5eb1e6;
-        color: white;
-    }
+        .btn-actions {
+            display: flex;
+            gap: 1px; /* Jarak antar tombol yang lebih kecil */
+        }
 
-    .btn-edit:hover {
-        background-color: #4a9ed0;
-    }
+        .alert {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
 
-    .btn-hapus {
-        background-color: #f44336;
-        color: white;
-    }
+        .alert-info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
 
-    .btn-hapus:hover {
-        background-color: #e53935;
-    }
+        /* Flexbox untuk layout */
+        .d-flex {
+            display: flex;
+            justify-content: space-between;
+        }
 
-    .btn-secondary {
-        background-color: #f44336;
-        padding: 10px 20px;
-        width: auto;
-        min-width: 120px;
-    }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            margin-bottom: 5px;
+            align-items: center;
+        }
 
-    .btn-secondary:hover {
-        background-color: #e53935;
-    }
+        .pagination a {
+            color: #007bff;
+            padding: 8px 16px;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            margin: 0 5px;
+            min-width: 10px;
+            height: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .pagination a:hover {
+            background-color: #f2f2f2;
+        }
+
+        .pagination .active {
+            background-color: #007bff;
+            color: white;
+        }
+
+        /* Media query untuk perangkat kecil (smartphone) */
+        @media (max-width: 768px) {
+            /* Container menjadi lebih kecil */
+            .container {
+                width: 90%;
+                padding: 10px;
+            }
+
+            /* Tabel menjadi scrollable */
+            .table-container {
+                overflow-x: auto;
+            }
+
+            table {
+                font-size: 0.8em;
+            }
+
+            /* Ubah font ukuran lebih kecil */
+            td, th {
+                padding: 8px;
+                font-size: 0.75em;
+            }
+
+            /* Elemen tombol lebih rapat */
+            .btn {
+                padding: 5px;
+                font-size: 0.75em;
+            }
+
+            /* Atur pagination */
+            .pagination a {
+                padding: 6px 10px;
+                font-size: 0.7em;
+            }
+
+            /* Sidebar dan konten dashboard */
+            .dashboard-content {
+                padding: 0;
+            }
+
+            .alert {
+                font-size: 0.85em;
+            }
+        }
+
+        /* Media query untuk perangkat sangat kecil (layar < 480px) */
+        @media (max-width: 480px) {
+            .container {
+                padding: 5px;
+            }
+
+            table {
+                font-size: 0.7em;
+            }
+
+            td, th {
+                padding: 6px;
+                font-size: 0.65em;
+            }
+
+            .btn {
+                padding: 4px;
+                font-size: 0.65em;
+            }
+
+            .pagination a {
+                padding: 4px 8px;
+                font-size: 0.6em;
+            }
+
+            h2 {
+                font-size: 1.2em;
+            }
+        }
 </style>
 <body>
     @include('template.sidebarmanager')
@@ -174,19 +286,22 @@
                         <td>Rp {{ number_format($laundry->tarif_layanan, 0, ',', '.') }}</td>
                         <td>{{ $laundry->keterangan }}</td> <!-- Tampilkan keterangan di sini -->
                         <td>
-                            <a href="{{ route('manager.editlayanan', $laundry->id) }}" class="btn-edit">Edit</a>
+                            <a href="{{ route('manager.editlayanan', $laundry->id) }}" class="btn btn-warning btn-sm">Edit</a>
                             <form action="{{ route('manager.deletelayanan', $laundry->id) }}" method="POST" style="display:inline-block;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn-hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus layanan ini?')">Hapus</button>
+                                <button type="submit" class="btn btn-secondary btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus layanan ini?')">Hapus</button>
                             </form>
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
-
-            <br><br>
+            <div class="pagination">
+                @for ($i = 1; $i <= $laundries->lastPage(); $i++)
+                    <a href="{{ $laundries->url($i) }}" class="{{ $laundries->currentPage() == $i ? 'active' : '' }}">{{ $i }}</a>
+                @endfor
+            </div>
             <div>
                 <a href="{{ route('manager.dashboard') }}" class="btn btn-secondary">Back</a>
             </div>

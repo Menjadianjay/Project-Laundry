@@ -10,28 +10,55 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/da.css') }}">
     <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
         body {
             background-image: url("{{ asset('img/dash.png') }}");
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
+
         .container {
-            background-color: #fff;
+            background-color: #ffff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 500px;
-            margin: 50px auto;
+            width: 90%;
+            max-width: 500px;
             text-align: center;
+            margin: 20px;
+            position: relative;
+            left: auto;
+            top: auto;
+            transform: none;
         }
 
         h3 {
             color: #333;
             margin-bottom: 20px;
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
         }
 
         label {
             display: block;
             margin-bottom: 5px;
             text-align: left;
+            font-size: clamp(0.9rem, 2vw, 1rem);
         }
 
         input[type="text"],
@@ -40,20 +67,53 @@
         select {
             width: 100%;
             padding: 8px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
             box-sizing: border-box;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        /* Radio buttons container */
+        .form-group .form-check {
+            display: inline-flex;
+            align-items: center;
+            margin-right: 15px;
+            margin-bottom: 10px;
+        }
+
+        .form-check-input {
+            margin-right: 5px;
+        }
+
+        .form-check-label {
+            font-size: clamp(0.9rem, 2vw, 1rem);
+        }
+
+        /* Buttons container */
+        .form-group.d-flex {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-start;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        button, .btn-secondary {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            min-width: 100px;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
         }
 
         button {
             background-color: #5eb1e6;
             color: white;
-            padding: 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            width: 30%;
         }
 
         button:hover {
@@ -63,41 +123,54 @@
         .btn-secondary {
             background-color: #f44336;
             color: white;
-            width: 15%;
-            text-align: center;
-            border-radius: 4px;
-            padding: 10px;
         }
 
         .btn-secondary:hover {
             background-color: #e53935;
         }
 
-        .form-check-label {
-            margin-left: 5px;
+        /* Media Queries */
+        @media screen and (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 15px;
+                margin: 10px;
+            }
+
+            .form-group.d-flex {
+                justify-content: center;
+            }
+
+            button, .btn-secondary {
+                width: 45%;
+                min-width: auto;
+            }
         }
 
-        .form-check {
-            display: inline-flex;
-            margin-right: 10px;
-        }
+        @media screen and (max-width: 480px) {
+            .container {
+                padding: 10px;
+                margin: 5px;
+            }
 
-        .form-group {
-            text-align: left;
-        }
+            .form-check {
+                display: block;
+                margin-bottom: 5px;
+            }
 
-        .form-group.d-flex {
-            justify-content: space-between;
-            display: flex;
+            button, .btn-secondary {
+                width: 100%;
+                margin-bottom: 10px;
+            }
         }
     </style>
 </head>
 
 <body>
+        @include('template.sidebarmanager')
         <div class="container">
-            @include('template.sidebarmanager')
             <h3>Edit Transaksi Laundry</h3>
-            <form action="{{ route('manager.update', $transaction->id) }}" method="POST">
+            <form action="{{ route('pegawai.update', $transaction->id) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="form-group">

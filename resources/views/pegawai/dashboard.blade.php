@@ -11,64 +11,39 @@
     <link rel="stylesheet" href="{{ asset('css/da.css') }}">
     <style>
         html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            font-family: 'Poppins', sans-serif;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+        height: 100%;
         }
 
         body {
             background-image: url("{{ asset('img/dash.png') }}");
+            height: 100vh;
             background-size: cover;
             background-position: center;
         }
 
-        .navbar {
-        text-align: center;
-        background: rgba(255, 255, 255, 0.8);
-        padding: 10px 0;
-        width: 100%;
-        position: fixed;
-        top: 0;
-        z-index: 1000;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        display: grid; /* Add this line */
-        place-items: center; /* Add this line */
-        }
-
-        .navbar h1 {
-            margin: 0;
-            color: #333;
-            font-size: 1.5rem;
-        }
-
-        .dashboard-content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            width: 100%;
-            text-align: center;
-
-        }
-
         .container {
-            background-color: #fff;
+            background-color: #ffff;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            width: 90%;
-            max-width: 500px;
+            box-shadow: 5 0 10px rgba(0, 0, 0, 0.1);
+            width: 500px;
             text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 60%;
+            transform: translate(-50%, -50%);
+            max-height: 90vh;
             overflow-y: auto;
-
+            margin-left:10%;
         }
-
-        h1 {
+        h1{
             background-color: white;
             color: black;
-
         }
 
         @media screen and (max-width: 768px) {

@@ -33,7 +33,7 @@
                     <h4 class="card-title">{{$laundry->jenis_layanan}} - {{$laundry->durasi_layanan}}</h4>
                     <p class="card-text">{{$laundry->keterangan}}</p>
                     <p class="card-info"><b>Harga {{$laundry->tarif_layanan}}-/kg</b></p>
-                    <a href="http://wa.me/628985552417" class="btn btn-primary">Pesan sekarang</a>
+                    <a href="http://wa.me/6281385613704" class="btn btn-primary">Pesan sekarang</a>
                 </div>
             </div>
             @endforeach
